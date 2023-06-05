@@ -13,10 +13,7 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
-    ],
+   
 
     /*
     |--------------------------------------------------------------------------
@@ -36,34 +33,16 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'client' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'clients',
         ],
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | User Providers
-    |--------------------------------------------------------------------------
-    |
-    | All authentication drivers have a user provider. This defines how the
-    | users are actually retrieved out of your database or other storage
-    | mechanisms used by this application to persist your user's data.
-    |
-    | If you have multiple user tables or models you may configure multiple
-    | sources which represent each model / table. These sources may then
-    | be assigned to any extra authentication guards you have defined.
-    |
-    | Supported: "database", "eloquent"
-    |
-    */
-
     'providers' => [
-        'users' => [
+        'clients' => [
             'driver' => 'eloquent',
             'model' => App\Models\Client::class,
-            'table' => 'clients',
         ],
     ],
 
@@ -71,7 +50,7 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-        
+ 
 
     /*
     |--------------------------------------------------------------------------

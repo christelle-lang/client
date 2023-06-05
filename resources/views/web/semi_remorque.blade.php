@@ -78,10 +78,10 @@
     <a href="{{route('shop_page')}}" class="nav-link ">Tout</a>
 </li>
 <li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link ">Fourgon</a>
+<a href="{{route('fourgon_page')}}" class="nav-link ">Fourgon</a>
 </li>
 <li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link">Sémi-remorque</a>
+<a href="{{route('shop_page')}}" class="nav-link active">Sémi-remorque</a>
 </li>
 <li class="nav-item">
 <a href="{{route('shop_page')}}" class="nav-link">Benne</a>
@@ -149,20 +149,20 @@
             <div class="list-group">
           <div class="list-group-item">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option1">
-              <label class="form-check-label" for="option1">Fourgon</label>
+              <input class="form-check-input" type="checkbox" id="option1" >
+              <label class="form-check-label" for="option1"> <a href="{{route('fourgon_page')}}"> Fourgon </a></label>
             </div>
           </div>
           <div class="list-group-item">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option2">
-              <label class="form-check-label" for="option2">Sémi-remorque</label>
+              <input class="form-check-input" type="checkbox" id="option2" checked>
+              <label class="form-check-label" for="option2">  Sémi-remorque </label>
             </div>
           </div>
           <div class="list-group-item">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="option3">
-              <label class="form-check-label" for="option3">Benne</label>
+              <label class="form-check-label" for="option3"> <a href="#"> Benne </a></label>
             </div>
           </div>
           <div class="list-group-item">
@@ -231,91 +231,46 @@
    
           <div class="col-md-9">
    <div class="row">
-    <div class="col-sm-6 col-lg-3 mix ui">
-      <div class="parts-item">
-      <div class="parts-top">
-      <img src="assets/img/camion1.jpg" alt="Parts">
-      </div>
-      <h3>Sémi-remorque</h3>
-      <span>12 kg</span>
-      <div class="cmn-btn">
-        <a class="banner-btn-left" href="#">
-          <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
-        </a>
-          <a class="banner-btn-left"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-            <i class="fa-solid fa-eye"></i>
-          </a>
-      </div>
-      </div>
-      </div>
-      <div class="col-sm-6 col-lg-3 mix ux">
-      <div class="parts-item">
-      <div class="parts-top">
-        <img src="assets/img/camion1.jpg" alt="Parts">
-      </div>
-      <h3>Sémi-remorque</h3>
-      <span>12 kg</span>
-      <div class="cmn-btn">
-        <a class="banner-btn-left" href="#">
-          <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
-        </a>
-          <a class="banner-btn-left"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-            <i class="fa-solid fa-eye"></i>
-          </a>
-      </div>
-      </div>
-      </div>
-      <div class="col-sm-6 col-lg-3 mix ui">
-      <div class="parts-item">
-      <div class="parts-top">
-        <img src="assets/img/camion1.jpg" alt="Parts">
-      </div>
-      <h3>Sémi-remorque</h3>
-      <span>12 kg</span>
-      <div class="cmn-btn">
-        <a class="banner-btn-left" href="#">
-          <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
-        </a>
-          <a class="banner-btn-left"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-            <i class="fa-solid fa-eye"></i>
-          </a>
-      </div>
-      </div>
-      </div>
-      <div class="col-sm-6 col-lg-3 mix ux">
-      <div class="parts-item">
-      <div class="parts-top">
-      <img src="assets/img/camion1.jpg" alt="Parts">
-      </div>
-      <h3>Sémi-remorque</h3>
-      <span>12 kg</span>
-      <div class="cmn-btn">
-        <a class="banner-btn-left" href="#">
-          <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
-        </a>
-          <a class="banner-btn-left"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-            <i class="fa-solid fa-eye"></i>
-          </a>
-      </div>
-      </div>
-      </div>
-      <div class="col-sm-6 col-lg-3 mix ux">
-      <div class="parts-item">
-      <div class="parts-top">
-        <img src="assets/img/camion1.jpg" alt="Parts">
-      </div>
-      <h3>Sémi-remorque</h3>
-      <span>12 kg</span>
-      <div class="cmn-btn">
-        <a class="banner-btn-left" href="#">
-          <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
-        </a>
-          <a class="banner-btn-left"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-            <i class="fa-solid fa-eye"></i>
-          </a>
-      </div>
-      </div>
-      </div>
+    @foreach($camionsFourgon as $index => $camion)
+        <div class="col-sm-6 col-lg-3 mix ui">
+            <div class="parts-item">
+                <div class="parts-top">
+                    <a href="{{ route('shop_page') }}"> 
+                        <div id="carouselExampleIndicators{{ $index }}" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach(json_decode($camion->photoCamion) as $imgIndex => $img)
+                                    <div class="carousel-item {{ $imgIndex === 0 ? 'active' : '' }}">
+                                        <img src="{{ asset($img) }}" alt="Parts">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators{{ $index }}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators{{ $index }}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+                <h3>Sémi-remorque</h3>
+                <span>{{ $camion->capaciteDeCharge }} kg</span>
+                <div class="cmn-btn">
+                    <a class="banner-btn-left" href="#">
+                        <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
+                    </a>
+                    <a class="banner-btn-left" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+ 
+@endforeach
+
+   
       </div>
    
     </div>

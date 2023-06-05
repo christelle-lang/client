@@ -33,31 +33,13 @@
 <title>Audeck - Auto Servicing Bootstrap 5 Template</title>
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <style>
-    .icon{
-        color:black;
-    }
-    .icon:hover {
-      color: #fdb819;
-    }
-    .custom-search-bar {
-      display: flex;
-      align-items: center;
-    }
-
-    .custom-search-bar .form-control {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    .custom-search-bar .btn {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-  </style>
-
-  
+  :root{
+      --jaune: #fdb819;
+  }
+</style>
 </head>
-<body>
+
+<body class="d-flex flex-column min-vh-100 bg-light mt-5" >
 
 <div class="loader">
 <div class="d-table">
@@ -84,153 +66,67 @@
 <div class="container-fluid">
 <nav class="navbar navbar-expand-md navbar-light">
 <a class="navbar-brand" href="index.html">
-<img src="assets/img/logo.png" class="logo-one" alt="Logo">
-<img src="assets/img/logo-two.png" class="logo-two" alt="Logo">
+<img src="assets/img/logo.png" width="120px" class="logo-one" alt="Logo">
 </a>
+
 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+
 <ul class="navbar-nav ml-auto">
 
-    
+<li class="nav-item">
+  <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
+</li>   
  <li class="nav-item">
-<a href="#" class="nav-link dropdown-toggle active">Camion</a>
+<a href="#" class="nav-link dropdown-toggle ">Camion</a>
 <ul class="dropdown-menu">
 <li class="nav-item">
-    <a href="index.html" class="nav-link active">Tout</a>
+    <a href="#" class="nav-link ">Tout</a>
 </li>
 <li class="nav-item">
-<a href="index.html" class="nav-link ">Fourgon</a>
+<a href="#" class="nav-link ">Fourgon</a>
 </li>
 <li class="nav-item">
-<a href="index-2.html" class="nav-link">Sémi-remorque</a>
+<a href="#" class="nav-link">Sémi-remorque</a>
 </li>
 <li class="nav-item">
 <a href="index-3.html" class="nav-link">Benne</a>
 </li>
 <li class="nav-item">
-  <a href="index-3.html" class="nav-link">Plateau</a>
+  <a href="#" class="nav-link">Plateau</a>
 </li>
 <li class="nav-item">
-  <a href="index-3.html" class="nav-link">Citerne</a>
+  <a href="#" class="nav-link">Citerne</a>
 </li>
 <li class="nav-item">
-  <a href="index-3.html" class="nav-link">Frigorifique</a>
+  <a href="#" class="nav-link">Frigorifique</a>
 </li>
 </ul>
 </li> 
 <li class="nav-item">
-<a href="about.html" class="nav-link">A propos</a>
+<a href="{{route('about_page')}}" class="nav-link">A propos</a>
 </li> 
- {{-- <li class="nav-item">
-<a href="#" class="nav-link dropdown-toggle">Services</a>
-<ul class="dropdown-menu">
- <li class="nav-item">
-<a href="service.html" class="nav-link">Service</a>
-</li>
 <li class="nav-item">
-<a href="service-details.html" class="nav-link">Service Details</a>
-</li>
-</ul>
-</li> --}}
-<li class="nav-item">
-<a href="pricing.html" class="nav-link">Contact</a>
+<a href="{{route('contact_page')}}" class="nav-link">Contact</a>
 </li> 
-{{-- <li class="nav-item">
-<a href="#" class="nav-link dropdown-toggle">Blog</a>
-<ul class="dropdown-menu">
-<li class="nav-item">
-<a href="blog.html" class="nav-link">Blog</a>
-</li>
-<li class="nav-item">
-<a href="blog-details.html" class="nav-link">Blog Details</a>
-</li>
-</ul>
-</li>
-<li class="nav-item">
-<a href="#" class="nav-link dropdown-toggle">Pages</a>
-<ul class="dropdown-menu">
-<li class="nav-item">
-<a href="shop.html" class="nav-link">Shop</a>
-</li>
-<li class="nav-item">
-<a href="shop-details.html" class="nav-link">Shop Details</a>
-</li>
-<li class="nav-item">
-<a href="cart.html" class="nav-link">Cart</a>
-</li>
-<li class="nav-item">
-<a href="checkout.html" class="nav-link">Checkout</a>
-</li>
-<li class="nav-item">
-<a href="sign-up.html" class="nav-link">Sign Up</a>
-</li>
-<li class="nav-item">
-<a href="sign-in.html" class="nav-link">Sign In</a>
-</li>
-<li class="nav-item">
-<a href="engineer.html" class="nav-link">Engineer</a>
-</li>
-<li class="nav-item">
-<a href="testimonial.html" class="nav-link">Testimonial</a>
-</li>
-<li class="nav-item">
-<a href="faq.html" class="nav-link">FAQ</a>
-</li>
-<li class="nav-item">
-<a href="coming-soon.html" class="nav-link">Coming Soon</a>
-</li>
-<li class="nav-item">
-<a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
-</li>
-<li class="nav-item">
-<a href="terms-and-conditions.html" class="nav-link">Terms & Conditions</a>
- </li>
-</ul>
-</li> --}}
-{{-- <li class="nav-item">
-<a href="contact.html" class="nav-link">Contact</a>
-</li> --}}
 </ul>
 </div>
-{{-- <div class="serach_field_2">
-    <div class="search_inner">
-        <form action="" method="post">
-            @csrf
-           <div class="search_field">
-           <input type="search" name="recherche" placeholder="faites votre recherche ici...">
-           </div>
-           <button > <i class="ti-search"></i> </button>
-           </div>
-           </div>  
-           <div class=" ms-2 ">
-           <button type="submit"  class="">Rechercher</button>
-           </div>
-        </form>
-           --}}
-        
+<div class="container w-25">
+  <form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Rechercher..." aria-label="Search">
+    <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </form>
+</div>   
+
+
 <div class="cmn-btn">
   <a class="banner-btn-left" href="sign-in.html" onclick="afficherCard(event)">
     <i class='bx bxs-user-plus'></i> Connexion
   </a>
 </div>
 
-<div class="card border-dark mb-3" style="max-width: 18rem; display: none;" id="card">
-  <div class="card-header d-flex justify-content-center"><button type="button" class="btn btn-outline-warning flex-grow-1">Se connecter</button>
-  </div>
-  <div class="card-body text-primary">
-    <div>
-    <button type="button" class="btn btn-light flex-grow-1"><i class="fa-solid fa-user"></i> Votre compe</button>
-  </div>
-  <div class="mt-3">
-    <button type="button" class="btn btn-light flex-grow-1"><i class="fa-solid fa-bag-shopping"></i> Vos commandes</button>
-  </div>
-  </div>
-</div>
-
-
-<div  style="margin-left:15px">
-<a class="" href="{{route('shop_panier_page')}}">
-    <i  class="fa-solid fa-cart-shopping icon " style="font-size:19px"> </i>
-    <span style="font-size:16px"> Panier</span>
+<div  style="margin-left:15px;color:black">
+<a class="" href="{{route('shop_panier_page')}}" style="color:black">
+    <i  class="fa-solid fa-cart-shopping icon text "> <span style="font-family: poppins,sans-serif;font-weight:normal"> Panier </span></i>
 </a>
  
 </div>
@@ -239,9 +135,138 @@
 </div>
 </div>
 
-
 <section class="cart-area ptb-100">
-<div class="container">
+
+  <div class="container">
+    
+    <div class="row">
+       
+      <div class="col-sm-9">
+        <div class="card">
+          <div class="card-header">
+            <h4>Votre panier</h4>
+          </div>
+          <div class="card-body">
+         
+<div class="card w-100">
+  <div class="card-body">
+    <div class="row">
+    <div class="col-sm-3">
+      <img src="assets/img/home-one/truck-5248809_1280.jpg" alt="">
+    </div>
+    <div class="col-sm-9">
+      <div  style="float:left">
+    <h5 class="card-title">Sémi-remorque</h5>
+    <p class="card-text">12kg</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Volupta</p>
+    <a href="#" class="btn btn-dark">Détail</a>
+  </div>
+    <div style="float:right">
+    <h5 class="card-text" style="color:#fdb819">150 000f</h5>
+    <a href="#" class="btn btn-dark" ><i class="fa-solid fa-plus"></i></a>
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+    
+<div class="card w-100">
+  <div class="card-body">
+    <div class="row">
+    <div class="col-sm-3">
+      <img src="assets/img/home-one/truck-5248809_1280.jpg" alt="">
+    </div>
+    <div class="col-sm-9">
+      <div  style="float:left">
+    <h5 class="card-title">Sémi-remorque</h5>
+    <p class="card-text">12kg</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Volupta</p>
+    <a href="#" class="btn btn-dark">Détail</a>
+  </div>
+    <div style="float:right">
+    <h5 class="card-text" style="color:#fdb819">150 000f</h5>
+    <a href="#" class="btn btn-dark" ><i class="fa-solid fa-plus"></i></a>
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+    
+<div class="card w-100">
+  <div class="card-body">
+    <div class="row">
+    <div class="col-sm-3">
+      <img src="assets/img/home-one/truck-5248809_1280.jpg" alt="">
+    </div>
+    <div class="col-sm-9">
+      <div  style="float:left">
+    <h5 class="card-title">Sémi-remorque</h5>
+    <p class="card-text">12kg</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Volupta</p>
+    <a href="#" class="btn btn-dark">Détail</a>
+  </div>
+    <div style="float:right">
+    <h5 class="card-text" style="color:#fdb819">150 000f</h5>
+    <a href="#" class="btn btn-dark" ><i class="fa-solid fa-plus"></i></a>
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 " style="background-color:var(--jaune);">
+        <div class="card-header ">
+          <h4 class="text-light">Résumé commande</h4>
+        </div>
+          <div class="card mt-3">
+            
+            <div class="card-body d-flex justify-content-between ">
+              <p class="card-text">Sémi-remorque 12kg (du 14 janvier au 16 janvier)</p>
+            
+              <button type="button" class="btn-close" data-bs-dismiss="card" aria-label="Fermer"></button>
+            
+              <p class="position-absolute bottom-0 end-0 fw-bold" >150 000f</p>
+            </div>
+            
+            
+            </div>
+            <div class="card ">
+            
+              <div class="card-body d-flex justify-content-between ">
+                <p class="card-text">Sémi-remorque 12kg (du 14 janvier au 16 janvier)</p>
+              
+                <button type="button" class="btn-close" data-bs-dismiss="card" aria-label="Fermer"></button>
+              
+                <p class="position-absolute bottom-0 end-0 fw-bold" >150 000f</p>
+              </div>
+              
+              
+              </div>
+            
+            
+            <div class="card">
+              <div class="card-body fw-bold" style="background-color:rgb(247, 247, 247)">
+                TOTAL: 150.000f
+              </div>
+            </div>
+            
+<div class="cmn-btn d-flex justify-content-center mt-3">
+  <a class="banner-btn-left bg-dark " href="#" >
+     Valider commande
+  </a>
+</div>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+  
+
+  {{-- </div>
 <div class="cart-wrap">
 <table class="table">
 <thead class="thead">
@@ -510,9 +535,9 @@ Testimonials
 </li>
 </ul>
 </div>
+</div> 
 </div>
-</div>
-</div>
+</div>--}}
 </div>
 </footer>
 

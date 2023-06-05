@@ -171,44 +171,44 @@
 
 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
 
-<ul class="navbar-nav ml-auto">
+  <ul class="navbar-nav ml-auto">
 
-<li class="nav-item">
-  <a href="#" class="nav-link ">Accueil</a>
-</li>   
- <li class="nav-item">
-<a href="#" class="nav-link dropdown-toggle ">Camion</a>
-<ul class="dropdown-menu">
-<li class="nav-item">
-    <a href="#" class="nav-link ">Tout</a>
-</li>
-<li class="nav-item">
-<a href="#" class="nav-link ">Fourgon</a>
-</li>
-<li class="nav-item">
-<a href="#" class="nav-link">Sémi-remorque</a>
-</li>
-<li class="nav-item">
-<a href="index-3.html" class="nav-link">Benne</a>
-</li>
-<li class="nav-item">
-  <a href="#" class="nav-link">Plateau</a>
-</li>
-<li class="nav-item">
-  <a href="#" class="nav-link">Citerne</a>
-</li>
-<li class="nav-item">
-  <a href="#" class="nav-link">Frigorifique</a>
-</li>
-</ul>
-</li> 
-<li class="nav-item">
-<a href="#" class="nav-link">A propos</a>
-</li> 
-<li class="nav-item">
-<a href="#" class="nav-link">Contact</a>
-</li> 
-</ul>
+    <li class="nav-item">
+      <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
+    </li>   
+     <li class="nav-item">
+    <a href="#" class="nav-link dropdown-toggle ">Camion</a>
+    <ul class="dropdown-menu">
+    <li class="nav-item">
+        <a href="#" class="nav-link ">Tout</a>
+    </li>
+    <li class="nav-item">
+    <a href="#" class="nav-link ">Fourgon</a>
+    </li>
+    <li class="nav-item">
+    <a href="#" class="nav-link">Sémi-remorque</a>
+    </li>
+    <li class="nav-item">
+    <a href="index-3.html" class="nav-link">Benne</a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">Plateau</a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">Citerne</a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">Frigorifique</a>
+    </li>
+    </ul>
+    </li> 
+    <li class="nav-item">
+    <a href="{{route('about_page')}}" class="nav-link">A propos</a>
+    </li> 
+    <li class="nav-item">
+    <a href="{{route('contact_page')}}" class="nav-link">Contact</a>
+    </li> 
+    </ul>
 </div>
 <div class="container w-25">
   <form class="d-flex">

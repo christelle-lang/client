@@ -32,9 +32,119 @@
 
 <title>Audeck - Auto Servicing Bootstrap 5 Template</title>
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
+<style>
+  .nav-link{
+    font-size:20px;
+  }
+    .icon{
+        color:black;
+    }
+    .icon:hover {
+      color: #fdb819;
+    }
+    .custom-search-bar {
+      display: flex;
+      align-items: center;
+    }
 
+    .custom-search-bar .form-control {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .custom-search-bar .btn {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    
+    
+    .camion .circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: #fdb819;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .camion img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+    
+    .camion img:hover {
+      transform: scale(1.1);
+    }
+    .camion {
+      display: inline-block;
+      text-align: center;
+      margin: 2px;
+    }
+    .banner {
+      background-color: #fdb819;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .banner h2 {
+      color: white;
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+    .banner h5 {
+      color: white;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    
+    
+     .scrollable-container {
+      overflow-x: auto; /* Activation de la défilement vertical si nécessaire */
+      display: flex
+    }
+    .scrollable-container::-webkit-scrollbar {
+     width: 0;
+    }
+    .bolder{
+      font-weight: bold;
+      color:black;
+      text-align: center;
+    }
+    .banner-area{
+      height: 700px;
+    }
+    .text{
+      font-size: 18px;
+    }
+    .list-group-item{
+        border:none;
+    }
+
+    body {
+        min-height: 100vh;
+    }
+
+    .footer-container {
+        flex-grow: 1;
+    }
+</style>
+
+
+
+
+  
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light mt-5" >
+  @php
+  $camions = session('camions');
+  @endphp
+
+
 
 <div class="loader">
 <div class="d-table">
@@ -66,58 +176,101 @@
 
 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
 
-<ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto">
 
-<li class="nav-item">
-  <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
-</li>   
- <li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link dropdown-toggle ">Camion</a>
-<ul class="dropdown-menu">
-<li class="nav-item">
-    <a href="{{route('shop_page')}}" class="nav-link ">Tout</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link ">Fourgon</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link">Sémi-remorque</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link">Benne</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Plateau</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Citerne</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Frigorifique</a>
-</li>
-</ul>
-</li> 
-<li class="nav-item">
-<a href="{{route('about_page')}}" class="nav-link">A propos</a>
-</li> 
-<li class="nav-item">
-<a href="{{route('contact_page')}}" class="nav-link">Contact</a>
-</li> 
-</ul>
-</div>
+        <li class="nav-item">
+          <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
+        </li>   
+         <li class="nav-item">
+        <a href="{{route('shop_page')}}" class="nav-link dropdown-toggle ">Camion</a>
+        <ul class="dropdown-menu">
+        <li class="nav-item">
+            <a href="{{route('shop_page')}}" class="nav-link ">Tout</a>
+        </li>
+        <li class="nav-item">
+        <a href="{{route('shop_page')}}" class="nav-link ">Fourgon</a>
+        </li>
+        <li class="nav-item">
+        <a href="{{route('shop_page')}}" class="nav-link">Sémi-remorque</a>
+        </li>
+        <li class="nav-item">
+        <a href="{{route('shop_page')}}" class="nav-link">Benne</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('shop_page')}}" class="nav-link">Plateau</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('shop_page')}}" class="nav-link">Citerne</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('shop_page')}}" class="nav-link">Frigorifique</a>
+        </li>
+        </ul>
+        </li> 
+        <li class="nav-item">
+        <a href="{{route('about_page')}}" class="nav-link">A propos</a>
+        </li> 
+        <li class="nav-item">
+        <a href="{{route('contact_page')}}" class="nav-link">Contact</a>
+        </li> 
+        </ul>
+        </div>
 <div class="container w-25">
   <form class="d-flex">
     <input class="form-control me-2" type="search" placeholder="Rechercher..." aria-label="Search">
     <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
   </form>
 </div>   
+<div class="btn-group">
+
+    <button class="btn  btn-sm dropdown-toggle" style="color:#fdb819; font-size:18px" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-user"></i>
+        Bienvenue,{{ session('name') }}
+    </button>
+    <ul class="dropdown-menu">
+        <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+                <div class="card-body ">
+                    <div>
+                      <ul class="navbar-nav">
+                        <li class="nav-item">
+                          <a href="{{route('dashboard_view')}}" class="nav-link"><i class="fa-solid fa-user"></i> Votre compte</a>
+                        </li>
+                      </ul>
+                      <ul class="navbar-nav">
+                        <li class="nav-item">
+                          <a href="{{route('reservation_view')}}" class="nav-link"><i class="fa-solid fa-truck"></i> Vos réservations</a>
+                        </li>
+                      </ul>
+                      <ul class="navbar-nav">
+                        <li class="nav-item">
+                          <a href="#" class="nav-link "><i class="fa-solid fa-question"></i> Aide</a>
+                        </li>
+                      </ul>
+                     
+             </div>
+              
+            </ul>
+        </div>
+        
+        <div class="card-footer d-flex justify-content-center text">
+            <div >
+            
+              <form action="{{route('deconnexion_client')}}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-light flex-grow-1 text" style="color:#fdb819">Déconnexion</button>
+              </form>
+              </div>
+            
+        </div>
+        
+    </ul>
+
+  </div>
+
+ 
 
 
-<div class="cmn-btn">
-  <a class="banner-btn-left" href="{{route('connexion_page')}}">
-    <i class='bx bxs-user-plus'></i> Connexion
-  </a>
-</div>
 
 <div  style="margin-left:15px;color:black">
 <a class="" href="{{route('shop_panier_page')}}" style="color:black">
@@ -129,6 +282,8 @@
 </div>
 </div>
 </div>
+
+
 
 
 
@@ -318,7 +473,7 @@
                     </a>
                 </div>
                 <h3>Sémi-remorque</h3>
-                <span>12 kg</span>
+                <span>{{$camion->capaciteDeCharge}} kg</span>
                 <div class="cmn-btn">
                     <a class="banner-btn-left" href="#">
                         <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
@@ -397,7 +552,7 @@
                     </a>
                 </div>
                 <h3>Sémi-remorque</h3>
-                <span>12 kg</span>
+                <span>{{$camion->capaciteDeCharge}} kg</span>
                 <div class="cmn-btn">
                     <a class="banner-btn-left" href="#">
                         <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
@@ -471,7 +626,7 @@
                       </a>
                   </div>
                   <h3>Sémi-remorque</h3>
-                  <span>12 kg</span>
+                  <span>{{$camion->capaciteDeCharge}} kg</span>
                   <div class="cmn-btn">
                       <a class="banner-btn-left" href="#">
                           <i class="fa-sharp fa-solid fa-cart-shopping"></i>      

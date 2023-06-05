@@ -174,7 +174,7 @@
 <ul class="navbar-nav ml-auto">
 
 <li class="nav-item">
-  <a href="#" class="nav-link ">Accueil</a>
+  <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
 </li>   
  <li class="nav-item">
 <a href="#" class="nav-link dropdown-toggle ">Camion</a>
@@ -203,10 +203,10 @@
 </ul>
 </li> 
 <li class="nav-item">
-<a href="#" class="nav-link">A propos</a>
+<a href="{{route('about_page')}}" class="nav-link">A propos</a>
 </li> 
 <li class="nav-item">
-<a href="#" class="nav-link">Contact</a>
+<a href="{{route('contact_page')}}" class="nav-link">Contact</a>
 </li> 
 </ul>
 </div>

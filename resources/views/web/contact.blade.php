@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from templates.hibootstrap.com/audeck/default/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 May 2023 17:28:35 GMT -->
+<!-- Mirrored from templates.hibootstrap.com/audeck/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 May 2023 17:26:59 GMT -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,10 +24,17 @@
 <link rel="stylesheet" href="assets/css/responsive.css">
 
 <link rel="stylesheet" href="assets/css/theme-dark.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="assets/css/accueil.css">
+
+
 <title>Audeck - Auto Servicing Bootstrap 5 Template</title>
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100 bg-light mt-5" >
 
 <div class="loader">
 <div class="d-table">
@@ -51,107 +58,72 @@
 </div>
 
 <div class="main-nav">
-<div class="container">
+<div class="container-fluid">
 <nav class="navbar navbar-expand-md navbar-light">
 <a class="navbar-brand" href="index.html">
-<img src="assets/img/logo.png" class="logo-one" alt="Logo">
-<img src="assets/img/logo-two.png" class="logo-two" alt="Logo">
+<img src="assets/img/logo.png" width="120px" class="logo-one" alt="Logo">
 </a>
+
 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+
 <ul class="navbar-nav ml-auto">
+
 <li class="nav-item">
-<a href="#" class="nav-link dropdown-toggle">Home</a>
+  <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
+</li>   
+ <li class="nav-item">
+<a href="{{route('shop_page')}}" class="nav-link dropdown-toggle ">Camion</a>
 <ul class="dropdown-menu">
 <li class="nav-item">
-<a href="index.html" class="nav-link">Home Page One</a>
+    <a href="{{route('shop_page')}}" class="nav-link ">Tout</a>
 </li>
 <li class="nav-item">
-<a href="index-2.html" class="nav-link">Home Page Two</a>
+<a href="{{route('shop_page')}}" class="nav-link ">Fourgon</a>
 </li>
 <li class="nav-item">
-<a href="index-3.html" class="nav-link">Home Page Three</a>
+<a href="{{route('shop_page')}}" class="nav-link">Sémi-remorque</a>
+</li>
+<li class="nav-item">
+<a href="{{route('shop_page')}}" class="nav-link">Benne</a>
+</li>
+<li class="nav-item">
+  <a href="{{route('shop_page')}}" class="nav-link">Plateau</a>
+</li>
+<li class="nav-item">
+  <a href="{{route('shop_page')}}" class="nav-link">Citerne</a>
+</li>
+<li class="nav-item">
+  <a href="{{route('shop_page')}}" class="nav-link">Frigorifique</a>
 </li>
 </ul>
-</li>
+</li> 
 <li class="nav-item">
-<a href="about.html" class="nav-link">About</a>
-</li>
+<a href="{{route('about_page')}}" class="nav-link">A propos</a>
+</li> 
 <li class="nav-item">
-<a href="#" class="nav-link dropdown-toggle">Services</a>
-<ul class="dropdown-menu">
-<li class="nav-item">
-<a href="service.html" class="nav-link">Service</a>
-</li>
-<li class="nav-item">
-<a href="service-details.html" class="nav-link">Service Details</a>
-</li>
-</ul>
-</li>
-<li class="nav-item">
-<a href="pricing.html" class="nav-link">Pricing</a>
-</li>
-<li class="nav-item">
-<a href="#" class="nav-link dropdown-toggle">Blog</a>
-<ul class="dropdown-menu">
-<li class="nav-item">
-<a href="blog.html" class="nav-link">Blog</a>
-</li>
-<li class="nav-item">
-<a href="blog-details.html" class="nav-link">Blog Details</a>
-</li>
-</ul>
-</li>
-<li class="nav-item">
-<a href="#" class="nav-link dropdown-toggle">Pages</a>
-<ul class="dropdown-menu">
-<li class="nav-item">
-<a href="shop.html" class="nav-link">Shop</a>
-</li>
-<li class="nav-item">
-<a href="shop-details.html" class="nav-link">Shop Details</a>
-</li>
-<li class="nav-item">
-<a href="cart.html" class="nav-link">Cart</a>
-</li>
-<li class="nav-item">
-<a href="checkout.html" class="nav-link">Checkout</a>
-</li>
-<li class="nav-item">
-<a href="sign-up.html" class="nav-link">Sign Up</a>
-</li>
-<li class="nav-item">
-<a href="sign-in.html" class="nav-link">Sign In</a>
-</li>
-<li class="nav-item">
-<a href="engineer.html" class="nav-link">Engineer</a>
-</li>
-<li class="nav-item">
-<a href="testimonial.html" class="nav-link">Testimonial</a>
-</li>
-<li class="nav-item">
-<a href="faq.html" class="nav-link">FAQ</a>
-</li>
-<li class="nav-item">
-<a href="coming-soon.html" class="nav-link">Coming Soon</a>
-</li>
-<li class="nav-item">
-<a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
-</li>
-<li class="nav-item">
-<a href="terms-and-conditions.html" class="nav-link">Terms & Conditions</a>
- </li>
-</ul>
-</li>
-<li class="nav-item">
-<a href="contact.html" class="nav-link active">Contact</a>
-</li>
+<a href="{{route('contact_page')}}" class="nav-link">Contact</a>
+</li> 
 </ul>
 </div>
+<div class="container w-25">
+  <form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Rechercher..." aria-label="Search">
+    <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </form>
+</div>   
+
+
 <div class="cmn-btn">
-<a class="banner-btn-left" href="sign-in.html">
-<i class='bx bxs-user-plus'></i>
-Sign In
+  <a class="banner-btn-left" href="{{route('connexion_page')}}" >
+    <i class='bx bxs-user-plus'></i> Connexion
+  </a>
+</div>
+
+<div  style="margin-left:15px;color:black">
+<a class="" href="{{route('shop_panier_page')}}" style="color:black">
+    <i  class="fa-solid fa-cart-shopping icon text "> <span style="font-family: poppins,sans-serif;font-weight:normal"> Panier </span></i>
 </a>
+ 
 </div>
 </nav>
 </div>
@@ -159,20 +131,19 @@ Sign In
 </div>
 
 
+
+
+
+
+
+
+
 <div class="page-title-area">
 <img src="assets/img/home-one/footer-car.png" alt="Title">
 <div class="container">
 <div class="page-title-content">
 <h2>Contact</h2>
-<ul>
-<li>
-<a href="index.html">Home</a>
-</li>
-<li>
-<i class='bx bx-chevron-right'></i>
-</li>
-<li>Contact</li>
-</ul>
+
 </div>
 </div>
 </div>
@@ -183,12 +154,12 @@ Sign In
 <div class="row">
 <div class="col-lg-6">
 <div class="contact-item contact-left">
-<h3>Our Located Place</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis velit libero vero, aliquid magnam sed, quidem labore unde aspernatur esse iusto quo quas, dolorum atque dignissimos asperiores. Ab, est accusantium.</p>
+<h3>Notre localisation</h3>
+<p>Nous sommes localisés à Abidjan cocody riviera 2 sogefia, villa 303</p>
 <ul>
 <li>
 <i class='bx bx-location-plus'></i>
-Address: Barmingha, QD 201, United Kingdom
+Address: +225 2722470500
 </li>
 <li>
 <i class='bx bx-mail-send'></i>
@@ -207,12 +178,12 @@ Address: Barmingha, QD 201, United Kingdom
 </div>
 <div class="col-lg-6">
 <div class="contact-item contact-right">
-<h3>Get In Touch</h3>
+<h3>Laissez nous un message</h3>
 <form id="contactForm">
 <div class="row">
 <div class="col-sm-6 col-lg-6">
 <div class="form-group">
-<input type="text" name="name" id="name" class="form-control" required data-error="Please enter your name" placeholder="Name">
+<input type="text" name="name" id="name" class="form-control" required data-error="Please enter your name" placeholder="Nom">
 <div class="help-block with-errors"></div>
 </div>
 </div>
@@ -224,13 +195,13 @@ Address: Barmingha, QD 201, United Kingdom
 </div>
 <div class="col-sm-6 col-lg-6">
 <div class="form-group">
-<input type="text" name="phone_number" id="phone_number" required data-error="Please enter your number" class="form-control" placeholder="Phone">
+<input type="text" name="phone_number" id="phone_number" required data-error="Please enter your number" class="form-control" placeholder="Téléphone">
 <div class="help-block with-errors"></div>
 </div>
 </div>
 <div class="col-sm-6 col-lg-6">
 <div class="form-group">
-<input type="text" name="msg_subject" id="msg_subject" class="form-control" required data-error="Please enter your subject" placeholder="Subject">
+<input type="text" name="msg_subject" id="msg_subject" class="form-control" required data-error="Please enter your subject" placeholder="Sujet">
 <div class="help-block with-errors"></div>
 </div>
 </div>
@@ -245,7 +216,7 @@ Address: Barmingha, QD 201, United Kingdom
 <div class="form-check agree-label">
 <input name="gridCheck" value="I agree to the terms and privacy policy." class="form-check-input" type="checkbox" id="gridCheck" required>
 <label class="form-check-label" for="gridCheck">
-Accept <a href="terms-condition.html">Terms & Conditions</a> And <a href="privacy-policy.html">Privacy Policy.</a>
+Accepter <a href="terms-condition.html">Termes & Conditions</a> et <a href="privacy-policy.html">Politique privée.</a>
 </label>
 <div class="help-block with-errors gridCheck-error"></div>
 </div>
@@ -253,7 +224,7 @@ Accept <a href="terms-condition.html">Terms & Conditions</a> And <a href="privac
 </div>
 <div class="col-md-12 col-lg-12">
 <button type="submit" class="contact-btn btn">
-Send Message
+Envoyez le message
 </button>
 <div id="msgSubmit" class="h3 text-center hidden"></div>
 <div class="clearfix"></div>
