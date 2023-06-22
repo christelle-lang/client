@@ -10,10 +10,10 @@ class semi_remorque_controller extends Controller
 {
     
     public function semi_remorque_page(){
-        $typeFourgon = TypeCamion::where('name', 'semi-remorque')->first();
-        $camionsFourgon = Camion::where('typeCamion', $typeFourgon->id)->get();
+        $typeSemiRemorque = TypeCamion::where('name', 'semi-remorque')->first();
+        $camionsSemiRemorque = Camion::where('typeCamion', $typeSemiRemorque->id)->get();
     
     
-        return view('web.semi_remorque', compact('camionsFourgon'));
+        return view('web.semi_remorque', compact('camionsSemiRemorque'));
 }
 }

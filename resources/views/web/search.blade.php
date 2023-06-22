@@ -6,36 +6,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
-<link rel="stylesheet" href="assets/css/meanmenu.css">
+<link rel="stylesheet" href="{{asset('assets/css/meanmenu.css')}}">
 
-<link rel="stylesheet" href="assets/css/boxicons.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/boxicons.min.css')}}">
 
-<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-<link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
 
-<link rel="stylesheet" href="assets/css/magnific-popup.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/magnific-popup.min.css')}}">
 
-<link rel="stylesheet" href="assets/css/animate.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/animate.min.css')}}">
 
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
-<link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
 
-<link rel="stylesheet" href="assets/css/theme-dark.css">
+<link rel="stylesheet" href="{{asset('assets/css/theme-dark.css')}}">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<link rel="stylesheet" href="assets/css/accueil.css">
+<link rel="stylesheet" href="{{asset('assets/css/accueil.css')}}">
 
 
 <title>Audeck - Auto Servicing Bootstrap 5 Template</title>
-<link rel="icon" type="image/png" href="assets/img/favicon.png">
-
+<link rel="icon" type="image/png" href="{{asset('assets/img/favicon.png')}}">
+{{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 </head>
-<body class="d-flex flex-column min-vh-100 bg-light mt-5" >
 
+
+<body class="d-flex flex-column min-vh-100 bg-light mt-5" >
+{{-- {{dd($camions_selected)}} --}}
+
+{{-- {{dd($villeRegion)}} 
 <div class="loader">
 <div class="d-table">
 <div class="d-table-cell">
@@ -47,13 +51,13 @@
 </div>
 </div>
 </div>
-
+--}}
 
 <div class="navbar-area fixed-top">
 
 <div class="mobile-nav">
 <a href="index.html" class="logo">
-<img src="assets/img/logo.png" alt="Logo">
+<img src="{{asset('assets/img/logo.png')}}" alt="Logo">
 </a>
 </div>
 
@@ -61,40 +65,27 @@
 <div class="container-fluid">
 <nav class="navbar navbar-expand-md navbar-light">
 <a class="navbar-brand" href="index.html">
-<img src="assets/img/logo.png" width="120px" class="logo-one" alt="Logo">
+<img src="{{asset('assets/img/logo.png')}}" width="120px" class="logo-one" alt="Logo">
 </a>
 
 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
 
 <ul class="navbar-nav ml-auto">
-
 <li class="nav-item">
   <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
 </li>   
  <li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link dropdown-toggle ">Camion</a>
+<a href="#" class="nav-link dropdown-toggle ">Camion</a>
 <ul class="dropdown-menu">
-<li class="nav-item">
-    <a href="{{route('shop_page')}}" class="nav-link ">Tout</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('fourgon_page')}}" class="nav-link " >   Fourgon</a>
-  </li>
-  <li class="nav-item">
-  <a href="{{route('semi_remorque_page')}}" class="nav-link">Sémi-remorque</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link">Benne</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Plateau</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Citerne</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Frigorifique</a>
-</li>
+  @foreach ($types as $type)
+    <li class="nav-item">
+      <form id="setTypeForm_{{ $type->id }}" method="post" action="{{ route('search') }}">
+        @csrf
+        <input type="hidden" name="type_id" value="{{ $type->id }}">
+        <a href="#" onclick="event.preventDefault(); document.getElementById('setTypeForm_{{ $type->id }}').submit();" class="nav-link">{{ $type->nameCamion }}</a>
+      </form>
+    </li>
+  @endforeach
 </ul>
 </li> 
 <li class="nav-item">
@@ -137,145 +128,175 @@
 
 <section class="work-area pt-100 pb-70 ">
   
+  <div id="Container" class="row mt-4 ">
+    <div class="col-md-3">
+      <form id="regionForm"  action="" method="post">
 
-    <div id="Container" class="row mt-4 ">
-      <div class="col-md-3">
-  
-        <div class="card"style="background-color:white,  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" >
-          <div class="container-fluid">
-  
-          <div class="card-body">
-            <p style="font-size:20px; color:white, font-weight:bold">TYPE DU CAMION</p>
-            <div class="list-group">      
+      <div class="card bg-dark">
+        <div class="card-body ">
+          <p class="mt-3" style="font-size:20px; color:white; font-weight:bold">LIEU D'ENLEVEMENT</p>
+       <!-- Vue -->
+        @csrf
+        <select  id="selectRegion" name="region_id" class="form-select regionForm form-select-lg mb-3" aria-label=".form-select-lg example">
+            @foreach ($regions as $region)
+                <option value="{{ $region->id }}">{{ $region->name }}</option>
+            @endforeach
+        </select>
+   
+    
+    <select id="selectCity" class="mt-4 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <option selected disabled>Ville</option>
+    </select>
 
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option1" checked>
-              <label class="form-check-label " for="option1"> <a href="{{ route('fourgon_page') }}" data-route="{{ route('fourgon_page') }}" class="black"> Fourgon </a></label>
-            </div>
-          </div>
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option2">
-              <label class="form-check-label " for="option2" >  <a href="{{ route('semi_remorque_page') }}" data-route="{{ route('semi_remorque_page') }}" class="black">  Sémi-remorque </a></label>  
-            </div>
-          </div>
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option3">
-              <label class="form-check-label black" for="option3"><a href="{{ route('benne_page') }}" data-route="{{ route('benne_page') }}"  class="black">  Benne </a></label>
-            </div>
-          </div>
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option3">
-              <label class="form-check-label" for="option3"><a href="{{ route('plateau_page') }}" data-route="{{ route('plateau_page') }}"  class="black"> Plateau </a></label>
-            </div>
-          </div>
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option3">
-              <label class="form-check-label" for="option3"><a href="{{ route('citerne_page') }}" data-route="{{ route('citerne_page') }}" class="black">  Citerne </a></label>
-            </div>
-          </div>
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option3">
-              <label class="form-check-label" for="option3"><a href="{{ route('frigorifique_page') }}" data-route="{{ route('frigorifique_page') }}"  class="black">  Frigorifique</a></label>
-            </div>
-          </div>
+   
         </div>
-  
-        <p class="mt-3" style="font-size:20px; color:white, font-weight:bold">CAPACITE DE CHARGE</p>
-  
+      </div>
+   
+      <div class="card"style="background-color:white,  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" >
+        <div class="container-fluid">
+
+        <div class="card-body">
+          <p style="font-size:20px; color:white, font-weight:bold">TYPE DU CAMION</p>
+         
+        <div class="list-group">    
+         
+        @foreach ($types as $type)
+          <div class="list-group-item">
+            <div class="form-check">
+              <input class="form-check-input  regionForm" type="checkbox" id="option1" name="typeCamion[]" value="{{ $type->id }}"  {{ in_array($type->id, $selectedTypes) ? 'checked' : '' }}   > 
+              <label class="form-check-label " for="option{{ $type->id }}"> {{ $type->nameCamion }} </a></label>
+            </div>
+          </div>
+        @endforeach
+     
+        </div>
+   
+
+          <p class="" style="font-size:20px; color:white, font-weight:bold">CAPACITE DE CHARGE</p> 
+       
         <div class="d-flex justify-content-between">
-          
           <div>
-            <input  style="width: 90px; height:40px;  border-radius: 2px;" oninput="calcul()" type="number" name="nb1" id="nb1" value="0">
+            <input  style="width: 90px; height:40px;  border-radius: 2px;" oninput="calcul()" type="number" name="minCapacity" id="nb1" value="">
         </div>
-        <div  >
+        <div>
         -
       </div>
         <div>
-            <input style="width: 90px; height:40px;border-radius: 2px;"  oninput="calcul()" type="number" name="nb2" id="nb2" value="0">
+            <input style="width: 90px; height:40px;border-radius: 2px;"  oninput="calcul()" type="number" name="maxCapacity" id="nb2" value="">
         </div>
-       
-    
+ 
+      
         <div>
           
         </div>
         
       </div>
+    </form>   
   
-  
-      <p class="mt-3" style="font-size:20px; color:white, font-weight:bold">LIEU D'ENLEVEMENT</p>
-  
-      <div class="input-group">
-        <input type="text" class="form-control" id="inputCity">
-        <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
-      </div>
+     
+      
+{{--       
+      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <option selected>Ville</option>
+        @foreach ($regions as $region)
+          <option value="{{ $region->name }}">{{ $region->name }}</option>
+        @endforeach
+      </select> --}}
+      
+      
       <p class="mt-3" style="font-size:20px; color:white, font-weight:bold">DATE D'ENLEVEMENT</p>
+     
       <div class="input-group">
   
-      <input style="width: 300px; height:40px;" type="date" name="date" id="date-input" value="2023-05-22">
+      <input style="width: 300px; height:40px;" type="date" name="date" id="date-input" value="">
     </div>
         
       </div>
+  
       
-  
-  
-  </div>
-  
-      </div>
-    </div>
-  
-   
-          <div class="col-md-9">
-   <div class="row">
-    @foreach($camionsFourgon as $index => $camion)
-        <div class="col-sm-6 col-lg-3 mix ui">
-            <div class="parts-item">
-                <div class="parts-top">
-                    <a href="{{ route('shop_page') }}"> 
-                        <div id="carouselExampleIndicators{{ $index }}" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                @foreach(json_decode($camion->photoCamion) as $imgIndex => $img)
-                                    <div class="carousel-item {{ $imgIndex === 0 ? 'active' : '' }}">
-                                        <img src="{{ asset($img) }}" alt="Parts">
-                                    </div>
-                                @endforeach
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators{{ $index }}" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators{{ $index }}" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </a>
-                </div>
-                <h3>Fourgon</h3>
-                <span>{{ $camion->capaciteDeCharge }} kg</span>
-                <div class="cmn-btn">
-                    <a class="banner-btn-left" href="#">
-                        <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
-                    </a>
-                    <a class="banner-btn-left" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                        <i class="fa-solid fa-eye"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
- 
-@endforeach
+{{-- 
+      <div class="cmn-btn d-flex justify-content-center mb-3">
+    <a class="banner-btn-left" href="#" onclick="event.preventDefault(); document.getElementById('searchForm').submit();">Envoyer</a></button>
 
-   
-      </div>
-   
+      </div> --}}
+    
     </div>
-    </section>
+      </div>
+    </div>
+    <form id="searchForm">
+      @csrf
+
+      <!-- Ajoutez ici les champs du formulaire (capacité min, capacité max, types, lieu d'enlèvement) -->
+
+      <!-- Exemple de champ capacité min -->
+      <label for="capacite_min">Capacité minimale :</label>
+      <input type="number" name="capacite_min" id="capacite_min">
+
+      <!-- Exemple de champ capacité max -->
+      <label for="capacite_max">Capacité maximale :</label>
+      <input type="number" name="capacite_max" id="capacite_max">
+
+      <!-- Autres champs du formulaire -->
+
+      <!-- ... -->
+
+      <button type="button" onclick="submitForm()">Rechercher</button>
+  </form>
+   
+  
+    <div class="col-md-9">
+      <div class="row">
+      
+      
+                 
+                  @foreach($camions_selected as $index => $camion)
+                         
+                  
+                      <div class="col-sm-6 col-lg-3 mix ui">
+                          <div class="parts-item">
+                              <div class="parts-top">
+                                  <a href="{{ route('shop_page') }}"> 
+                                      <div id="carouselExampleIndicators{{ $index }}" class="carousel slide" data-bs-ride="carousel">
+                                          <div class="carousel-inner">
+                                              @foreach(json_decode($camion->photoCamion) as $imgIndex => $img)
+                                                  <div class="carousel-item {{ $imgIndex === 0 ? 'active' : '' }}">
+                                                      <img src="{{ asset($img) }}" alt="Parts">
+                                                  </div>
+                                              @endforeach
+                                          </div>
+                                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators{{ $index }}" data-bs-slide="prev">
+                                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                              <span class="visually-hidden">Previous</span>
+                                          </button>
+                                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators{{ $index }}" data-bs-slide="next">
+                                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                              <span class="visually-hidden">Next</span>
+                                          </button>
+                                      </div>
+                                  </a>
+                              </div>
+                              <h3>{{ $camion->nameCamion }}</h3>
+                              <span>{{ $camion->capaciteDeCharge }} kg</span>
+                              <div class="cmn-btn">
+                                  <a class="banner-btn-left" href="#">
+                                      <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
+                                  </a>
+                                  <a class="banner-btn-left" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                      <i class="fa-solid fa-eye"></i>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                   
+                  @endforeach
+        
+    
+
+      </div>
+  </div>
+</div>
+  </section>
+  
   
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
@@ -427,7 +448,7 @@
 
 <footer class="footer-area-two pt-100">
 <div class="footer-img">
-<img src="assets/img/home-one/footer-car.png" alt="Footer">
+<img src="{{asset('assets/img/home-one/footer-car.png')}}" alt="Footer">
 </div>
 <div class="container">
 <div class="row">
@@ -607,31 +628,136 @@ Testimonials
 </footer>
 
 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 
-<script src="assets/js/jquery.meanmenu.js"></script>
+<script src="{{asset('assets/js/jquery.meanmenu.js')}}"></script>
 
-<script src="assets/js/jquery.mixitup.min.js"></script>
+<script src="{{asset('assets/js/jquery.mixitup.min.js')}}"></script>
 
-<script src="assets/js/owl.carousel.min.js"></script>
+<script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
 
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
+<script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
 
-<script src="assets/js/jquery.ajaxchimp.min.js"></script>
+<script src="{{asset('assets/js/jquery.ajaxchimp.min.js')}}"></script>
 
-<script src="assets/js/form-validator.min.js"></script>
+<script src="{{asset('assets/js/form-validator.min.js')}}"></script>
 
-<script src="assets/js/contact-form-script.js"></script>
+<script src="{{asset('assets/js/contact-form-script.js')}}"></script>
 
-<script src="assets/js/wow.min.js"></script>
+<script src="{{asset('assets/js/wow.min.js')}}"></script>
 
-<script src="assets/js/custom.js"></script>
+<script src="{{asset('assets/js/custom.js')}}"></script>
 
-<script src="assets/js/checkbox.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
+
+
+
+
+<script>
+  
+function submitForm() {
+            var formData = new FormData(document.getElementById("searchForm"));
+            var capaciteMin = formData.get("capacite_min");
+            var capaciteMin = formData.get("capacite_max");
+            
+
+
+            fetch("{{ route('search') }}", {
+                method: "POST",
+                body: capaciteMin
+            })
+            .then(function(response) {
+                // Traiter la réponse du contrôleur
+                return response.json();
+            })
+            .then(function(data) {
+                // Traiter les données de la réponse
+                // ...
+
+                // Exemple d'affichage des résultats dans une liste
+                var resultsList = document.getElementById("resultsList");
+                resultsList.innerHTML = "";
+                data.forEach(function(truck) {
+                    var listItem = document.createElement("li");
+                    listItem.textContent = truck.name;
+                    resultsList.appendChild(listItem);
+                });
+            })
+            .catch(function(error) {
+                console.log(error);
+                // Gérer l'erreur d'une manière appropriée (affichage d'un message, etc.)
+                // ...
+            });
+        }
+
+
+ // document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+           
+
+         
+  //       checkbox.addEventListener('change', function() {
+  //         // alert('yh');
+  //           document.getElementById('searchForm').submit();
+  //       });
+  //   });
+
+
+  
+
+//     document.querySelectorAll('#selectRegion, #selectCity, #nb1, #nb2, #date-input').forEach(function(element) {
+
+//     element.addEventListener('change', function() {
+//         document.getElementById('searchForm').submit();
+//     });
+// });
+    
+//     document.getElementById('selectRegion').addEventListener('change', function() {
+
+// document.getElementById('regionForm').submit();
+// });
+// document.getElementById('selectRegion').addEventListener('change', function() {
+//     var selectedOption = this.options[this.selectedIndex];
+//     var selectedRegion = selectedOption.text;
+//     document.getElementById('selectedRegion').textContent = selectedRegion;
+// });
+
+
+
+
+
+
+
+  // $('#selectRegion').on('change',function (event) {
+  //   event.preventDefault();
+  //   var test = 'test';
+  //   alert(test);
+  // });
+
+
+  
+  // $('.regionForm').on('change', function(event) {
+  //   event.preventDefault(); // Empêcher le rechargement de la page
+  //   var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+  //   var regionId = $('#selectRegion').val(); // Récupérer l'ID de la région sélectionnée
+  //   var typeCamion = [];
+
+  //   // Récupérer les cases à cocher cochées
+  //   $('input[name="typeCamion[]"]:checked').each(function() {
+  //     typeCamion.push($(this).val());
+  //   });
+
+    // Effectuer une requête AJAX pour envoyer les données au contrôleur
+  
+
+</script>
 
 
 </body>
 
 <!-- Mirrored from templates.hibootstrap.com/audeck/default/shop.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 May 2023 17:28:28 GMT -->
 </html>
+
+
+

@@ -17,7 +17,7 @@ class Camion extends Model
          */
            protected $fillable = [
             'id', 'proprio_id', 'conducteur_id', 'typeCamion', 'detailCamion', 'numImmatriculation', 'capaciteDeCharge', 'photoCamion', 'statut'
-        ];
+           ];
     
     
 }

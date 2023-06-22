@@ -67,35 +67,25 @@
 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
 
 <ul class="navbar-nav ml-auto">
-
 <li class="nav-item">
   <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
 </li>   
  <li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link dropdown-toggle ">Camion</a>
+<a href="#" class="nav-link dropdown-toggle ">Camion</a>
 <ul class="dropdown-menu">
-<li class="nav-item">
-    <a href="{{route('shop_page')}}" class="nav-link ">Tout</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link ">Fourgon</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link">Sémi-remorque</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link">Benne</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Plateau</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Citerne</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Frigorifique</a>
-</li>
+  @foreach ($types as $type)
+  <li class="nav-item">
+    <form id="setTypeForm_{{ $type->id }}" method="post" action="{{ route('search') }}">
+      @csrf
+      <input type="hidden" name="type_id" value="{{ $type->id }}">
+      <a href="#" onclick="event.preventDefault(); document.getElementById('setTypeForm_{{ $type->id }}').submit();" class="nav-link">{{ $type->nameCamion }}</a>
+    </form>
+  </li>
+  @endforeach
 </ul>
+
+
+
 </li> 
 <li class="nav-item">
 <a href="{{route('about_page')}}" class="nav-link">A propos</a>

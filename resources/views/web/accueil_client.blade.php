@@ -179,7 +179,7 @@
     <ul class="navbar-nav ml-auto">
 
         <li class="nav-item">
-          <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
+          <a href="{{route('accueil_page')}}"  class="nav-link ">Accueil</a>
         </li>   
          <li class="nav-item">
         <a href="{{route('shop_page')}}" class="nav-link dropdown-toggle ">Camion</a>
@@ -188,10 +188,10 @@
             <a href="{{route('shop_page')}}" class="nav-link ">Tout</a>
         </li>
         <li class="nav-item">
-        <a href="{{route('shop_page')}}" class="nav-link ">Fourgon</a>
+        <a href="{{route('fourgon_page')}}" class="nav-link ">Fourgon</a>
         </li>
         <li class="nav-item">
-        <a href="{{route('shop_page')}}" class="nav-link">Sémi-remorque</a>
+        <a href="{{route('semi_remorque_page')}}" class="nav-link">Sémi-remorque</a>
         </li>
         <li class="nav-item">
         <a href="{{route('shop_page')}}" class="nav-link">Benne</a>

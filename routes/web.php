@@ -1,5 +1,13 @@
 <?php
 
+
+
+
+
+use App\Http\Controllers\plateau_controller;
+use App\Http\Controllers\frigorifique_controller;
+use App\Http\Controllers\benne_controller;
+use App\Http\Controllers\citerne_controller;
 use App\Http\Controllers\semi_remorque_controller;
 use App\Http\Controllers\fourgon_controller;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +18,7 @@ use App\Http\Controllers\login_controller;
 use App\Http\Controllers\dashboard_controller;
 use App\Http\Controllers\contact_controller;
 use App\Http\Controllers\client_controller;
+
 
 
 
@@ -67,4 +76,26 @@ route::get('/old_reservation_page',[dashboard_controller::class,'old_reservation
 route::get('/fourgon_page',[fourgon_controller::class,'fourgon_page'])->name('fourgon_page');
 
 route::get('/semi_remorque_page',[semi_remorque_controller::class,'semi_remorque_page'])->name('semi_remorque_page');
+
+route::get('/citerne_page',[citerne_controller::class,'citerne_page'])->name('citerne_page');
+
+route::get('/frigorifique_page',[frigorifique_controller::class,'frigorifique_page'])->name('frigorifique_page');
+
+route::get('/plateau_page',[plateau_controller::class,'plateau_page'])->name('plateau_page');
+
+route::get('/benne_page',[benne_controller::class,'benne_page'])->name('benne_page');
+
+
+route::post('/set_type/{type_id}',[benne_controller::class,'setType'])->name('set_type');
+
+route::post('/region',[benne_controller::class,'villeRegion'])->name('region');
+
+route::post('/search',[benne_controller::class,'search'])->name('search');
+
+
+
+
+
+
+
 

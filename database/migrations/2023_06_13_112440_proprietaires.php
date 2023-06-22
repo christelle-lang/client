@@ -19,6 +19,10 @@ class Proprietaires extends Migration
             $table->string('name');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('region_id');
+            $table->foreign('region_id')->references('id')->on('regions');
+            $table->unsignedBigInteger('ville_id');
+            $table->foreign('ville_id')->references('id')->on('villes');
             $table->string('email')->unique()->nullable()->email();
             $table->integer('phone1');
             $table->integer('phone2')->nullable();

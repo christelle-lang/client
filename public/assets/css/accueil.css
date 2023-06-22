@@ -95,7 +95,10 @@
     }
     .text{
       font-size: 18px;
+    
     }
+
+    
     .list-group-item{
         border:none;
     }
@@ -107,4 +110,7 @@
     .footer-container {
         flex-grow: 1;
     }
-  
+    div .black{
+      color:black;
+    
+    }

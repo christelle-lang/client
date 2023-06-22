@@ -183,11 +183,11 @@
     <a href="#" class="nav-link ">Tout</a>
 </li>
 <li class="nav-item">
-<a href="#" class="nav-link ">Fourgon</a>
-</li>
-<li class="nav-item">
-<a href="#" class="nav-link">Sémi-remorque</a>
-</li>
+  <a href="{{route('fourgon_page')}}" class="nav-link ">Fourgon</a>
+  </li>
+  <li class="nav-item">
+  <a href="{{route('semi_remorque_page')}}" class="nav-link">Sémi-remorque</a>
+  </li>
 <li class="nav-item">
 <a href="index-3.html" class="nav-link">Benne</a>
 </li>

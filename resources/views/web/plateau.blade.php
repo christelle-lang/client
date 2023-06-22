@@ -78,25 +78,25 @@
     <a href="{{route('shop_page')}}" class="nav-link ">Tout</a>
 </li>
 <li class="nav-item">
-  <a href="{{route('fourgon_page')}}" class="nav-link " >   Fourgon</a>
+    <a href="{{route('fourgon_page')}}" class="nav-link " >   Fourgon</a>
+    </li>
+    <li class="nav-item">
+    <a href="{{route('semi_remorque_page')}}" class="nav-link">Sémi-remorque</a>
   </li>
   <li class="nav-item">
-  <a href="{{route('semi_remorque_page')}}" class="nav-link">Sémi-remorque</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link">Benne</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Plateau</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Citerne</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Frigorifique</a>
-</li>
-</ul>
-</li> 
+  <a href="{{route('benne_page')}}" class="nav-link">Benne</a>
+  </li>
+  <li class="nav-item">
+    <a href="{{route('plateau_page')}}" class="nav-link">Plateau</a>
+  </li>
+  <li class="nav-item">
+    <a href="{{route('citerne_page')}}" class="nav-link">Citerne</a>
+  </li>
+  <li class="nav-item">
+    <a href="{{route('frigorifique_page')}}" class="nav-link">Frigorifique</a>
+  </li>
+  </ul>
+  </li>  
 <li class="nav-item">
 <a href="{{route('about_page')}}" class="nav-link">A propos</a>
 </li> 
@@ -146,93 +146,94 @@
   
           <div class="card-body">
             <p style="font-size:20px; color:white, font-weight:bold">TYPE DU CAMION</p>
+           
             <div class="list-group">      
 
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option1" checked>
-              <label class="form-check-label " for="option1"> <a href="{{ route('fourgon_page') }}" data-route="{{ route('fourgon_page') }}" class="black"> Fourgon </a></label>
+              <div class="list-group-item">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="option1" >
+                  <label class="form-check-label " for="option1"> <a href="{{ route('fourgon_page') }}" data-route="{{ route('fourgon_page') }}" class="black"> Fourgon </a></label>
+                </div>
+              </div>
+              <div class="list-group-item">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="option2">
+                  <label class="form-check-label " for="option2" >  <a href="{{ route('semi_remorque_page') }}" data-route="{{ route('semi_remorque_page') }}" class="black">  Sémi-remorque </a></label>  
+                </div>
+              </div>
+              <div class="list-group-item">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="option3">
+                  <label class="form-check-label black" for="option3"><a href="{{ route('benne_page') }}" data-route="{{ route('benne_page') }}"  class="black">  Benne </a></label>
+                </div>
+              </div>
+              <div class="list-group-item">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="option3" checked>
+                  <label class="form-check-label" for="option3"><a href="{{ route('plateau_page') }}" data-route="{{ route('plateau_page') }}"  class="black"> Plateau </a></label>
+                </div>
+              </div>
+              <div class="list-group-item">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="option3">
+                  <label class="form-check-label" for="option3"><a href="{{ route('citerne_page') }}" data-route="{{ route('citerne_page') }}" class="black">  Citerne </a></label>
+                </div>
+              </div>
+              <div class="list-group-item">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="option3">
+                  <label class="form-check-label" for="option3"><a href="{{ route('frigorifique_page') }}" data-route="{{ route('frigorifique_page') }}"  class="black">  Frigorifique</a></label>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option2">
-              <label class="form-check-label " for="option2" >  <a href="{{ route('semi_remorque_page') }}" data-route="{{ route('semi_remorque_page') }}" class="black">  Sémi-remorque </a></label>  
+      
+            <p class="mt-3" style="font-size:20px; color:white, font-weight:bold">CAPACITE DE CHARGE</p>
+      
+            <div class="d-flex justify-content-between">
+              
+              <div>
+                <input  style="width: 90px; height:40px;  border-radius: 2px;" oninput="calcul()" type="number" name="nb1" id="nb1" value="0">
             </div>
+            <div  >
+            -
           </div>
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option3">
-              <label class="form-check-label black" for="option3"><a href="{{ route('benne_page') }}" data-route="{{ route('benne_page') }}"  class="black">  Benne </a></label>
+            <div>
+                <input style="width: 90px; height:40px;border-radius: 2px;"  oninput="calcul()" type="number" name="nb2" id="nb2" value="0">
             </div>
-          </div>
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option3">
-              <label class="form-check-label" for="option3"><a href="{{ route('plateau_page') }}" data-route="{{ route('plateau_page') }}"  class="black"> Plateau </a></label>
-            </div>
-          </div>
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option3">
-              <label class="form-check-label" for="option3"><a href="{{ route('citerne_page') }}" data-route="{{ route('citerne_page') }}" class="black">  Citerne </a></label>
-            </div>
-          </div>
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="option3">
-              <label class="form-check-label" for="option3"><a href="{{ route('frigorifique_page') }}" data-route="{{ route('frigorifique_page') }}"  class="black">  Frigorifique</a></label>
-            </div>
-          </div>
-        </div>
-  
-        <p class="mt-3" style="font-size:20px; color:white, font-weight:bold">CAPACITE DE CHARGE</p>
-  
-        <div class="d-flex justify-content-between">
-          
-          <div>
-            <input  style="width: 90px; height:40px;  border-radius: 2px;" oninput="calcul()" type="number" name="nb1" id="nb1" value="0">
-        </div>
-        <div  >
-        -
-      </div>
-        <div>
-            <input style="width: 90px; height:40px;border-radius: 2px;"  oninput="calcul()" type="number" name="nb2" id="nb2" value="0">
-        </div>
-       
-    
-        <div>
-          
-        </div>
+           
         
-      </div>
-  
-  
-      <p class="mt-3" style="font-size:20px; color:white, font-weight:bold">LIEU D'ENLEVEMENT</p>
-  
-      <div class="input-group">
-        <input type="text" class="form-control" id="inputCity">
-        <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
-      </div>
-      <p class="mt-3" style="font-size:20px; color:white, font-weight:bold">DATE D'ENLEVEMENT</p>
-      <div class="input-group">
-  
-      <input style="width: 300px; height:40px;" type="date" name="date" id="date-input" value="2023-05-22">
-    </div>
-        
+            <div>
+              
+            </div>
+            
+          </div>
+      
+      
+          <p class="mt-3" style="font-size:20px; color:white, font-weight:bold">LIEU D'ENLEVEMENT</p>
+      
+          <div class="input-group">
+            <input type="text" class="form-control" id="inputCity">
+            <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
+          </div>
+          <p class="mt-3" style="font-size:20px; color:white, font-weight:bold">DATE D'ENLEVEMENT</p>
+          <div class="input-group">
+      
+          <input style="width: 300px; height:40px;" type="date" name="date" id="date-input" value="2023-05-22">
+        </div>
+            
+          </div>
+          
+      
+      
       </div>
       
-  
-  
-  </div>
-  
-      </div>
-    </div>
-  
+          </div>
+        </div>
+      
    
           <div class="col-md-9">
    <div class="row">
-    @foreach($camionsFourgon as $index => $camion)
+    @foreach($camionsPlateau as $index => $camion)
         <div class="col-sm-6 col-lg-3 mix ui">
             <div class="parts-item">
                 <div class="parts-top">
@@ -256,7 +257,7 @@
                         </div>
                     </a>
                 </div>
-                <h3>Fourgon</h3>
+                <h3>Plateau</h3>
                 <span>{{ $camion->capaciteDeCharge }} kg</span>
                 <div class="cmn-btn">
                     <a class="banner-btn-left" href="#">
@@ -629,7 +630,6 @@ Testimonials
 <script src="assets/js/custom.js"></script>
 
 <script src="assets/js/checkbox.js"></script>
-
 
 </body>
 

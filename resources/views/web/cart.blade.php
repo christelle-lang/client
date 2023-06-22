@@ -72,44 +72,43 @@
 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
 
 <ul class="navbar-nav ml-auto">
-
-<li class="nav-item">
-  <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
-</li>   
- <li class="nav-item">
-<a href="#" class="nav-link dropdown-toggle ">Camion</a>
-<ul class="dropdown-menu">
-<li class="nav-item">
-    <a href="#" class="nav-link ">Tout</a>
-</li>
-<li class="nav-item">
-<a href="#" class="nav-link ">Fourgon</a>
-</li>
-<li class="nav-item">
-<a href="#" class="nav-link">Sémi-remorque</a>
-</li>
-<li class="nav-item">
-<a href="index-3.html" class="nav-link">Benne</a>
-</li>
-<li class="nav-item">
-  <a href="#" class="nav-link">Plateau</a>
-</li>
-<li class="nav-item">
-  <a href="#" class="nav-link">Citerne</a>
-</li>
-<li class="nav-item">
-  <a href="#" class="nav-link">Frigorifique</a>
-</li>
-</ul>
-</li> 
-<li class="nav-item">
-<a href="{{route('about_page')}}" class="nav-link">A propos</a>
-</li> 
-<li class="nav-item">
-<a href="{{route('contact_page')}}" class="nav-link">Contact</a>
-</li> 
-</ul>
-</div>
+  <li class="nav-item">
+    <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
+  </li>   
+   <li class="nav-item">
+  <a href="{{route('shop_page')}}" class="nav-link dropdown-toggle ">Camion</a>
+  <ul class="dropdown-menu">
+  <li class="nav-item">
+      <a href="{{route('shop_page')}}" class="nav-link ">Tout</a>
+  </li>
+  <li class="nav-item">
+    <a href="{{route('fourgon_page')}}" class="nav-link " >   Fourgon</a>
+    </li>
+    <li class="nav-item">
+    <a href="{{route('semi_remorque_page')}}" class="nav-link">Sémi-remorque</a>
+  </li>
+  <li class="nav-item">
+  <a href="{{route('benne_page')}}" class="nav-link">Benne</a>
+  </li>
+  <li class="nav-item">
+    <a href="{{route('plateau_page')}}" class="nav-link">Plateau</a>
+  </li>
+  <li class="nav-item">
+    <a href="{{route('citerne_page')}}" class="nav-link">Citerne</a>
+  </li>
+  <li class="nav-item">
+    <a href="{{route('frigorifique_page')}}" class="nav-link">Frigorifique</a>
+  </li>
+  </ul>
+  </li> 
+  <li class="nav-item">
+  <a href="{{route('about_page')}}" class="nav-link">A propos</a>
+  </li> 
+  <li class="nav-item">
+  <a href="{{route('contact_page')}}" class="nav-link">Contact</a>
+  </li> 
+  </ul>
+  </div>
 <div class="container w-25">
   <form class="d-flex">
     <input class="form-control me-2" type="search" placeholder="Rechercher..." aria-label="Search">
