@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class accueil_controller extends Controller
 {
     public function accueil(){
-        $types=DB::table('type_camions')->get();
+        $types=DB::table('typecamions')->get();
 
         $camions=DB::table('camions')->get();
         return view('web.accueil',compact('camions','types'));

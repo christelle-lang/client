@@ -37,6 +37,12 @@
 
 
 <body class="d-flex flex-column min-vh-100 bg-light mt-5" >
+
+  @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 {{-- {{dd($camions_selected)}} --}}
 
 {{-- {{dd($villeRegion)}} 
@@ -52,6 +58,67 @@
 </div>
 </div>
 --}}
+
+{{-- <div class="d-flex ">
+  <div>
+  <form id="searchForm">
+      @csrf
+     
+  
+      <select  id="selectRegion" name="query" class="form-select regionForm form-select-lg mb-3" aria-label=".form-select-lg example">
+          @foreach ($regions as $region)
+              <option value="{{ $region->id }}">{{ $region->name }}</option>
+          @endforeach
+     </select>
+    </form>
+ 
+    <select id="selectCity" class="mt-4 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+      <option selected disabled>Ville</option>
+    </select>
+ 
+    <ul id="results"></ul>
+ --}}
+
+
+
+
+
+  {{-- <form id="searchForm">
+      @csrf
+     
+  
+      <select  id="selectRegion" name="query" class="form-select regionForm form-select-lg mb-3" aria-label=".form-select-lg example">
+          @foreach ($regions as $region)
+              <option value="{{ $region->id }}">{{ $region->name }}</option>
+          @endforeach
+     </select>
+    </form>
+ 
+    <select id="selectCity" class="mt-4 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+      <option selected disabled>Ville</option>
+    </select>
+ 
+    <ul id="results"></ul>
+        </div>
+      </div> --}}
+
+
+      {{--       
+      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <option selected>Ville</option>
+        @foreach ($regions as $region)
+          <option value="{{ $region->name }}">{{ $region->name }}</option>
+        @endforeach
+      </select> --}}
+      
+      
+     {{-- 
+      <div class="cmn-btn d-flex justify-content-center mb-3">
+    <a class="banner-btn-left" href="#" onclick="event.preventDefault(); document.getElementById('searchForm').submit();">Envoyer</a></button>
+
+      </div> --}}
+
+
 
 <div class="navbar-area fixed-top">
 
@@ -104,11 +171,44 @@
 </div>   
 
 
-<div class="cmn-btn">
-  <a class="banner-btn-left" href="{{route('connexion_page')}}" onclick="afficherCard(event)">
-    <i class='bx bxs-user-plus'></i> Connexion
-  </a>
-</div>
+@if(auth()->check()) {{-- Vérifier si le client est connecté --}}
+    <button class="btn btn-sm dropdown-toggle" style="color:#fdb819; font-size:18px" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-user"></i>
+        Bienvenue, {{ session('name') }}
+    </button>
+    <ul class="dropdown-menu">
+        <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+                <div class="card-body">
+                    <div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="{{route('dashboard_view')}}" class="nav-link"><i class="fa-solid fa-user"></i> Votre compte</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="{{route('reservation_view')}}" class="nav-link"><i class="fa-solid fa-truck"></i> Vos réservations</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link "><i class="fa-solid fa-question"></i> Aide</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </ul>
+@else
+    <div class="cmn-btn">
+        <a class="banner-btn-left" href="{{route('connexion_page')}}" onclick="afficherCard(event)">
+            <i class='bx bxs-user-plus'></i> Connexion
+        </a>
+    </div>
+@endif
+
 
 <div  style="margin-left:15px;color:black">
 <a class="" href="{{route('shop_panier_page')}}" style="color:black">
@@ -126,129 +226,78 @@
 
 
 
-<section class="work-area pt-100 pb-70 ">
-  
-  <div id="Container" class="row mt-4 ">
+<section class="work-area pt-100 pb-70">
+  <div class="row mt-4">
     <div class="col-md-3">
-      <form id="regionForm"  action="" method="post">
-
-      <div class="card bg-dark">
-        <div class="card-body ">
-          <p class="mt-3" style="font-size:20px; color:white; font-weight:bold">LIEU D'ENLEVEMENT</p>
-       <!-- Vue -->
-        @csrf
-        <select  id="selectRegion" name="region_id" class="form-select regionForm form-select-lg mb-3" aria-label=".form-select-lg example">
-            @foreach ($regions as $region)
-                <option value="{{ $region->id }}">{{ $region->name }}</option>
-            @endforeach
-        </select>
-   
-    
-    <select id="selectCity" class="mt-4 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-        <option selected disabled>Ville</option>
-    </select>
-
-   
-        </div>
-      </div>
-   
-      <div class="card"style="background-color:white,  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" >
-        <div class="container-fluid">
-
-        <div class="card-body">
-          <p style="font-size:20px; color:white, font-weight:bold">TYPE DU CAMION</p>
-         
-        <div class="list-group">    
-         
-        @foreach ($types as $type)
-          <div class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input  regionForm" type="checkbox" id="option1" name="typeCamion[]" value="{{ $type->id }}"  {{ in_array($type->id, $selectedTypes) ? 'checked' : '' }}   > 
-              <label class="form-check-label " for="option{{ $type->id }}"> {{ $type->nameCamion }} </a></label>
+      <form id="searchForm">
+        <div class="card bg-dark">
+          <div class="card-body">
+            <p class="mt-3" style="font-size:20px; color:white; font-weight:bold">LIEU D'ENLEVEMENT</p>
+            @csrf
+            <select id="selectRegion" name="query" class="form-select regionForm form-select-lg mb-3" aria-label=".form-select-lg example">
+              @foreach ($regions as $region)
+              <option value="{{ $region->id }}">{{ $region->name }}</option>
+              @endforeach
+            </select>
+            <select id="selectCity" class="mt-4 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+              <option selected disabled>Ville</option>
+            </select>
+            <ul id="results"></ul>
+          </div>
+          <div class="card-body">
+            <p class="mt-0" style="font-size:20px; color:white; font-weight:bold">TYPE CAMION</p>
+            <div class="list-group">
+              @foreach ($types as $type)
+              <div class="list-group-item">
+                <div class="form-check">
+                  <input class="form-check-input  regionForm" type="checkbox" id="option1" name="typeCamion[]" value="{{ $type->id }}" {{ in_array($type->id, $selectedTypes) ? 'checked' : '' }}>
+                  <label class="form-check-label " for="option{{ $type->id }}">{{ $type->nameCamion }}</a></label>
+                </div>
+              </div>
+              @endforeach
             </div>
           </div>
-        @endforeach
-     
+          <div class="card-body">
+            <p class="mt-0" style="font-size:20px; color:white; font-weight:bold">CAPACITE DE CHARGE</p>
+            <div class="mb-3 d-flex">
+              <input type="number" class="form-control me-2" id="minCapacity" name="minCapacity" placeholder="Capacité minimale" value="">
+              <hr class="flex-grow-1 my-auto">
+              <input type="number" class="form-control ms-2" id="maxCapacity" name="maxCapacity" placeholder="Capacité maximale" value="">
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="mt-0" style="font-size:20px; color:white; font-weight:bold">DATE D'ENLEVEMENT</p>
+            <div class="input-group">
+              <input type="date" class="form-control" id="dateEnlevement"   name="date"  value="" onchange="formatDate(event)">
+            </div>
+          </div>
         </div>
-   
-
-          <p class="" style="font-size:20px; color:white, font-weight:bold">CAPACITE DE CHARGE</p> 
-       
-        <div class="d-flex justify-content-between">
-          <div>
-            <input  style="width: 90px; height:40px;  border-radius: 2px;" oninput="calcul()" type="number" name="minCapacity" id="nb1" value="">
-        </div>
-        <div>
-        -
-      </div>
-        <div>
-            <input style="width: 90px; height:40px;border-radius: 2px;"  oninput="calcul()" type="number" name="maxCapacity" id="nb2" value="">
-        </div>
- 
-      
-        <div>
-          
-        </div>
-        
-      </div>
-    </form>   
-  
-     
-      
-{{--       
-      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-        <option selected>Ville</option>
-        @foreach ($regions as $region)
-          <option value="{{ $region->name }}">{{ $region->name }}</option>
-        @endforeach
-      </select> --}}
-      
-      
-      <p class="mt-3" style="font-size:20px; color:white, font-weight:bold">DATE D'ENLEVEMENT</p>
-     
-      <div class="input-group">
-  
-      <input style="width: 300px; height:40px;" type="date" name="date" id="date-input" value="">
+      </form>
     </div>
-        
-      </div>
-  
-      
-{{-- 
-      <div class="cmn-btn d-flex justify-content-center mb-3">
-    <a class="banner-btn-left" href="#" onclick="event.preventDefault(); document.getElementById('searchForm').submit();">Envoyer</a></button>
-
-      </div> --}}
-    
-    </div>
-      </div>
-    </div>
-    <form id="searchForm">
-      @csrf
-
-      <!-- Ajoutez ici les champs du formulaire (capacité min, capacité max, types, lieu d'enlèvement) -->
-
-      <!-- Exemple de champ capacité min -->
-      <label for="capacite_min">Capacité minimale :</label>
-      <input type="number" name="capacite_min" id="capacite_min">
-
-      <!-- Exemple de champ capacité max -->
-      <label for="capacite_max">Capacité maximale :</label>
-      <input type="number" name="capacite_max" id="capacite_max">
-
-      <!-- Autres champs du formulaire -->
-
-      <!-- ... -->
-
-      <button type="button" onclick="submitForm()">Rechercher</button>
-  </form>
-   
-  
     <div class="col-md-9">
-      <div class="row">
-      
-      
-                 
+      <div class="row" id="camionsContainer">
+        <!-- Camions will be displayed here -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="photoContainer" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <!-- Les images des camions seront ajoutées ici -->
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#photoContainer" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#photoContainer" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+          
                   @foreach($camions_selected as $index => $camion)
                          
                   
@@ -295,7 +344,7 @@
       </div>
   </div>
 </div>
-  </section>
+
   
   
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -363,7 +412,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <form action="" method="get">
+      <form action="{{route('envoi_demande')}}" method="post">
         @csrf
         <fieldset>
           <legend >Informations marchandise</legend><hr>
@@ -371,13 +420,13 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label>Type de marchandise:</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="type">
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label>Nombre :</label>
-                <input type="text" class="form-control" name="dateEnelevemen" >
+                <input type="text" class="form-control" name="nombre" >
               </div>
             </div>
           </div>
@@ -388,13 +437,13 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label>Lieu d'enlèvement:</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="lieuEnlevement">
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label>Date d'enlèvement:</label>
-                <input type="date" class="form-control" name="nombre" >
+                <input type="date" class="form-control" name="dateEnlevement" >
               </div>
             </div>
           </div>
@@ -402,13 +451,13 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label>Lieu de livraison:</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="lieuExpedition">
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label>Date voulue de livraison:</label>
-                <input type="date" class="form-control" name="dateEnelevemen" value="22/05/2023">
+                <input type="date" class="form-control" name="dateExpedition" value="22/05/2023">
               </div>
             </div>
           </div>
@@ -419,21 +468,24 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label>Nom du destinataire:</label>
-                <input type="text" class="form-control" >
+                <input type="text" class="form-control" name="nom_desti">
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label>Numéro du destinataire:</label>
-                <input type="text" class="form-control" name="dateEnelevemen" >
+                <input type="text" class="form-control" name="number_desti" >
               </div>
             </div>
           </div>
+          <input type="hidden" name="client_id" value="{{ auth()->user()->id }}">
+          <input type="hidden" name="camion_id" id="camionIdInput" value="">
+
           
         </fieldset>
         <div class="modal-footer">
           <div class="cmn-btn d-flex justify-content-center mt-4">
-            <a class="banner-btn-left text">Commander</a>
+            <button type="submit"> <a     class="banner-btn-left text">Commander</a> </button>
           </div>
         </div>
       </form>
@@ -656,42 +708,201 @@ Testimonials
 
 <script>
   
-function submitForm() {
-            var formData = new FormData(document.getElementById("searchForm"));
-            var capaciteMin = formData.get("capacite_min");
-            var capaciteMin = formData.get("capacite_max");
+// function submitForm() {
+//             var formData = new FormData(document.getElementById("searchForm"));
+//             var capaciteMin = formData.get("capacite_min");
+//             var capaciteMin = formData.get("capacite_max");
             
 
 
-            fetch("{{ route('search') }}", {
-                method: "POST",
-                body: capaciteMin
-            })
-            .then(function(response) {
-                // Traiter la réponse du contrôleur
-                return response.json();
-            })
-            .then(function(data) {
-                // Traiter les données de la réponse
-                // ...
+//             fetch("{{ route('search') }}", {
+//                 method: "POST",
+//                 body: capaciteMin
+//             })
+//             .then(function(response) {
+//                 // Traiter la réponse du contrôleur
+//                 return response.json();
+//             })
+//             .then(function(data) {
+//                 // Traiter les données de la réponse
+//                 // ...
 
-                // Exemple d'affichage des résultats dans une liste
-                var resultsList = document.getElementById("resultsList");
-                resultsList.innerHTML = "";
-                data.forEach(function(truck) {
-                    var listItem = document.createElement("li");
-                    listItem.textContent = truck.name;
-                    resultsList.appendChild(listItem);
-                });
-            })
-            .catch(function(error) {
-                console.log(error);
-                // Gérer l'erreur d'une manière appropriée (affichage d'un message, etc.)
-                // ...
-            });
-        }
+//                 // Exemple d'affichage des résultats dans une liste
+//                 var resultsList = document.getElementById("resultsList");
+//                 resultsList.innerHTML = "";
+//                 data.forEach(function(truck) {
+//                     var listItem = document.createElement("li");
+//                     listItem.textContent = truck.name;
+//                     resultsList.appendChild(listItem);
+//                 });
+//             })
+//             .catch(function(error) {
+//                 console.log(error);
+//                 // Gérer l'erreur d'une manière appropriée (affichage d'un message, etc.)
+//                 // ...
+//             });
+//         }
+
+</script>
+
+<script>
+
+const dateInput = document.getElementById('dateEnlevement');
+dateInput.addEventListener('change', formatDate);
 
 
+function formatDate(event) {
+  const dateInput = event.target;
+  const selectedDate = new Date(dateInput.value);
+  const formattedDate = selectedDate.toISOString().split('T')[0];
+  dateInput.value = formattedDate;
+  sendFormData();
+}
+
+
+const searchUrl = "{{ route('recherche') }}";
+const form = document.getElementById('searchForm');
+const minCapacity = document.getElementById('minCapacity');
+const resultsContainer = document.getElementById('results');
+const maxCapacity = document.getElementById('maxCapacity');
+// const dateEnlevement = document.getElementById('dateEnlevement');
+
+minCapacity.addEventListener('change', sendFormData);
+maxCapacity.addEventListener('change', sendFormData);
+// dateEnlevement.addEventListener('change', sendFormData);
+
+const checkboxTypeCamion = document.querySelectorAll('.form-check-input');
+
+// Ajouter un écouteur d'événement à chaque case à cocher
+checkboxTypeCamion.forEach(checkbox => {
+  checkbox.addEventListener('change', sendFormData);
+});
+
+function sendFormData() {
+  event.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
+
+  const formData = new FormData(form);
+
+  fetch(searchUrl, {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Erreur lors de la requête.');
+      }
+    })
+    .then(data => {
+      const villesData = data[0];
+      const camionsData = data[1];
+
+      displayCamions(camionsData);
+      displayResults(villesData);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
+function displayResults(data) {
+  resultsContainer.innerHTML = '';
+
+  const selectCity = document.getElementById('selectCity');
+  selectCity.innerHTML = '<option selected disabled>Ville</option>';
+
+  if (data.length === 0) {
+    selectCity.innerHTML = '<option selected disabled> aucune Ville</option>';
+  } else {
+    data.forEach(result => {
+      const option = document.createElement('option');
+      option.textContent = result;
+      selectCity.appendChild(option);
+    });
+  }
+}
+
+function displayCamions(data) {
+  const camionsContainer = document.getElementById('camionsContainer');
+  camionsContainer.innerHTML = '';
+
+  data.forEach(camion => {
+    const div = document.createElement('div');
+    div.classList.add('col-sm-6', 'col-lg-3', 'mix', 'ui');
+    div.innerHTML = `
+      <div class="parts-item " data-camion-id="${camion.id}">
+        <div class="parts-top">
+          <a href="http://127.0.0.1:8000/shop"> 
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                ${getCarouselItems(camion.photoCamion)}
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </a>
+        </div>
+        <h3>${camion.nameCamion}</h3>
+        <span>${camion.capaciteDeCharge} kg</span>
+        <div class="cmn-btn">
+          <a class="banner-btn-left" href="#">
+            <i class="fa-sharp fa-solid fa-cart-shopping"></i>      
+          </a>
+          <a class="banner-btn-left" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+            <i class="fa-solid fa-eye"></i>
+          </a>
+        </div>
+      </div>
+    `;
+    div.querySelector('.parts-item').addEventListener('click', function() {
+       
+      setCamionId(camion.id);
+    });
+      
+    camionsContainer.appendChild(div);
+  });
+}
+
+function getCarouselItems(photos) {
+  const photosArray = JSON.parse(photos);
+
+  let carouselItems = '';
+
+  photosArray.forEach((photo, index) => {
+    const activeClass = index === 0 ? 'active' : '';
+    carouselItems += `
+      <div class="carousel-item ${activeClass}">
+        <img src="${photo}" alt="Image">
+      </div>
+    `;
+  });
+
+  return carouselItems;
+}
+
+
+function setCamionId(camionId) {
+  const camionIdInput = document.getElementById('camionIdInput');
+  camionIdInput.value = camionId;
+}
+
+</script>
+
+
+
+
+<script>
+
+
+
+        
  // document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
            
 
@@ -752,7 +963,6 @@ function submitForm() {
   
 
 </script>
-
 
 </body>
 

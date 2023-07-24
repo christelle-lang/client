@@ -1,37 +1,51 @@
-<!DOCTYPE html>
-<html lang="zxx">
+@include('web.header')
 
-<!-- Mirrored from templates.hibootstrap.com/audeck/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 May 2023 17:26:59 GMT -->
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+ 
 
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+ .top-bar {
+  background-color: #fff;
+  padding: 10px;
+  margin-right: 10px;
+}
 
-<link rel="stylesheet" href="assets/css/meanmenu.css">
+.btn-custom1 {
+  background-color: #fdb819;
+  color: #ffffff;
+}
 
-<link rel="stylesheet" href="assets/css/boxicons.min.css">
+.btn-custom2 {
+  background-color: #ffffff;
+  color: #000000;
+}
 
-<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-<link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+.btn-custom1:hover {
+  color: #ffffff;
+}
 
-<link rel="stylesheet" href="assets/css/magnific-popup.min.css">
+.btn-custom2:hover {
+  color: #fdb819;
+}
+.engineer-item img {
+  width: 180px; /* Définir la largeur souhaitée */
+  height: 180px; /* Définir la hauteur souhaitée */
+}
+.black{
+  color:#000000
+}
+.card {
+      border-radius: 10px;
+    }
+.card-header{
+  background-color:#fdb819;
+   color:#fff
+}
 
-<link rel="stylesheet" href="assets/css/animate.min.css">
 
-<link rel="stylesheet" href="assets/css/style.css">
-
-<link rel="stylesheet" href="assets/css/responsive.css">
-
-<link rel="stylesheet" href="assets/css/theme-dark.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<link rel="stylesheet" href="assets/css/accueil.css">
+</style>
 
 
-<title>Audeck - Auto Servicing Bootstrap 5 Template</title>
-<link rel="icon" type="image/png" href="assets/img/favicon.png">
+
 
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light mt-5" >
@@ -67,71 +81,54 @@
 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
 
 <ul class="navbar-nav ml-auto">
-
 <li class="nav-item">
   <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
 </li>   
- <li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link dropdown-toggle ">Camion</a>
+ {{-- <li class="nav-item">
+<a href="#" class="nav-link dropdown-toggle ">Camion</a>
 <ul class="dropdown-menu">
-<li class="nav-item">
-    <a href="{{route('shop_page')}}" class="nav-link ">Tout</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link ">Fourgon</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link">Sémi-remorque</a>
-</li>
-<li class="nav-item">
-<a href="{{route('shop_page')}}" class="nav-link">Benne</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Plateau</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Citerne</a>
-</li>
-<li class="nav-item">
-  <a href="{{route('shop_page')}}" class="nav-link">Frigorifique</a>
-</li>
+  @foreach ($types as $type)
+  <li class="nav-item">
+    <form id="setTypeForm_{{ $type->id }}" method="post" action="{{ route('search') }}">
+      @csrf
+      <input type="hidden" name="type_id" value="{{ $type->id }}">
+      <a href="#" onclick="event.preventDefault(); document.getElementById('setTypeForm_{{ $type->id }}').submit();" class="nav-link">{{ $type->nameCamion }}</a>
+    </form>
+  </li>
+  @endforeach
 </ul>
-</li> 
+
+
+
+</li>  --}}
 <li class="nav-item">
-<a href="{{route('about_page')}}" class="nav-link">A propos</a>
-</li> 
-<li class="nav-item">
-<a href="{{route('contact_page')}}" class="nav-link">Contact</a>
-</li> 
+  <a href="{{route('contact_page')}}" class="nav-link">Contact</a>
+  </li> 
+
 </ul>
 </div>
-<div class="container w-25">
-  <form class="d-flex">
-    <input class="form-control me-2" type="search" placeholder="Rechercher..." aria-label="Search">
-    <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-  </form>
-</div>   
 
-<div class="cmn-btn">
-  <a class="banner-btn-left" href="{{route('connexion_page')}}}" onclick="afficherCard(event)">
-    <i class='bx bxs-user-plus'></i> Connexion
+<a href="{{route('form_demande')}}"><button class="btn btn-custom1 me-2" type="button"> Trouver des chargements </button></a>
+<button class="btn btn-custom2" type="button">Se connecter</button>
+
+
+{{-- <div class="cmn-btn">
+  <a class="banner-btn-left" href="{{route('connexion_page')}}">
+    Trouver des chargements
   </a>
 </div>
+<div class="cmn-btn ">
+  <a class="banner-btn-left" href="{{route('connexion_page')}}">
+    Connexion
+  </a>
+</div> --}}
 
-<div  style="margin-left:15px;color:black">
-<a class="" href="{{route('shop_panier_page')}}" style="color:black">
-    <i  class="fa-solid fa-cart-shopping icon text "> <span style="font-family: poppins,sans-serif;font-weight:normal"> Panier </span></i>
-</a>
  
 </div>
 </nav>
 </div>
 </div>
 </div>
-
-
-
-
 
 
 

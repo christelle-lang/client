@@ -60,7 +60,7 @@ public function villeRegion(Request $request)
         // dd( $formData);
     
         $minCapacity = $request->input('min_capacity');
-        dd(  $minCapacity);
+ 
         $maxCapacity = $request->input('max_capacity');
         // dd( $maxCapacity);
         $pickupLocation = $request->input('pickup_location');
@@ -165,7 +165,7 @@ if(!empty($minCapacity) ){
 
 $camions_selected= $search->get();
 
-
+ 
 
 // dd($camions_selected);
      
@@ -291,24 +291,12 @@ $villes=DB::table('villes')->get();
 
 
 
-
-
-
-
-return response()->json([
-    'camions_selected' => $camions_selected,
-    'types' => $types,
-    'regions' => $regions,
-    'selectedTypes' => $selectedTypes,
-    'type_id' => $type_id,
-    'options' => $options,
-    'regionId' => $regionId,
-    'nameRegion' => $nameRegion
-]);
-
-
-}
-}
+   
+    
+return view ('web.search',compact('camions_selected','types','regions','selectedTypes','type_id','options','regionId','nameRegion'));
+    
+    
+                }}
 
     
 

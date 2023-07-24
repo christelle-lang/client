@@ -18,6 +18,7 @@ use App\Http\Controllers\login_controller;
 use App\Http\Controllers\dashboard_controller;
 use App\Http\Controllers\contact_controller;
 use App\Http\Controllers\client_controller;
+use App\Http\Controllers\essaie_controller;
 
 
 
@@ -91,6 +92,27 @@ route::post('/set_type/{type_id}',[benne_controller::class,'setType'])->name('se
 route::post('/region',[benne_controller::class,'villeRegion'])->name('region');
 
 route::post('/search',[benne_controller::class,'search'])->name('search');
+
+
+route::get('/essaie',[essaie_controller::class,'affiche_essaie'])->name('essaie');
+
+route::post('/recherche',[essaie_controller::class,'recherche'])->name('recherche');
+
+route::get('/region',[essaie_controller::class,'region'])->name('region');
+
+
+route::post('/envoi_demande',[essaie_controller::class,'envoi_demande'])->name('envoi_demande');
+
+
+route::get('/form_demande',[essaie_controller::class,'form_demande'])->name('form_demande');
+
+
+
+route::post('/devis',[essaie_controller::class,'devis'])->name('devis');
+
+
+
+route::get('/back_commande',[essaie_controller::class,'back_commande'])->name('back_commande');
 
 
 

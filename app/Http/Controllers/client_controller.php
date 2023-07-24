@@ -60,7 +60,7 @@ class client_controller extends Controller
                 $name = $user->name;
            
                 $camions=DB::table('camions')->get();
-                return redirect()->route('accueil_client')->with(['name' => $name, 'camions' => $camions]);
+                return redirect()->route('form_demande')->with(['name' => $name, 'camions' => $camions]);
             } else {
                  return back()->withErrors([
                      'email' => 'Les identifiants sont incorrects.',

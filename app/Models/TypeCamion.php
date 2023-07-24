@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TypeCamion extends Model
+class Typecamion extends Model
 {
     use HasFactory;
     
@@ -15,7 +15,7 @@ class TypeCamion extends Model
          * @var array<int, string>
          */
         protected $fillable = [
-            'id', 'name'       
+            'id', 'name','created_at', 'updated_at',   
          ];
 
 }
