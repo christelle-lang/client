@@ -74,80 +74,13 @@
     
         </div>
         
-        
-        <div class="navbar-area fixed-top">
-        
-        <div class="mobile-nav">
-        <a href="index.html" class="logo">
-        <img src="assets/img/logo.png" alt="Logo">
-        </a>
-        </div>
-        
-        <div class="main-nav">
-        <div class="container-fluid">
-        <nav class="navbar navbar-expand-md navbar-light">
-        <a class="navbar-brand" href="index.html">
-        <img src="assets/img/logo.png" width="120px" class="logo-one" alt="Logo">
-        </a>
-        
-        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-        
-        <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
-        </li>   
-         {{-- <li class="nav-item">
-        <a href="#" class="nav-link dropdown-toggle ">Camion</a>
-        <ul class="dropdown-menu">
-          @foreach ($types as $type)
-          <li class="nav-item">
-            <form id="setTypeForm_{{ $type->id }}" method="post" action="{{ route('search') }}">
-              @csrf
-              <input type="hidden" name="type_id" value="{{ $type->id }}">
-              <a href="#" onclick="event.preventDefault(); document.getElementById('setTypeForm_{{ $type->id }}').submit();" class="nav-link">{{ $type->nameCamion }}</a>
-            </form>
-          </li>
-          @endforeach
-        </ul>
-        
-        
-        
-        </li>  --}}
-        <li class="nav-item">
-            <a href="{{route('about_page')}}" class="nav-link">A propos</a>
-        </li> 
-        
-        </ul>
-        </div>
-        
-        <a href="{{route('form_demande')}}"><button class="btn btn-custom1 me-2" type="button"> Trouver des chargements </button></a>
-        <a href="{{route('connexion_page')}}"><button class="btn btn-custom2" type="button">Se connecter</button></a>
-        
-        
-        {{-- <div class="cmn-btn">
-          <a class="banner-btn-left" href="{{route('connexion_page')}}">
-            Trouver des chargements
-          </a>
-        </div>
-        <div class="cmn-btn ">
-          <a class="banner-btn-left" href="{{route('connexion_page')}}">
-            Connexion
-          </a>
-        </div> --}}
-        
-         
-        </div>
-        </nav>
-        </div>
-        </div>
-        </div>
-        
+        @include('web.navbar')
         <div class="card mt-5 mb-5">
             <div class="card-body">
                 <div class="row">
                     <div class="col 3">
                         <h6>Votre envoie</h6>
-                        {{ session('form_data')['typeMarchandise']}}
+                        {{ session('typeMarchandiseNom')}}
 
                     </div>
 
@@ -197,9 +130,9 @@
                       <h5 class="card-title color">Informations client</h5>
                       <p class="card-text">
                         
-                        {{ session('user.name') }} <br>
-                    email: christelle@gmail.com<br>
-                    numéro: 0103980379<br>
+                        Nom:    {{ session('user.name') }} <br>
+                    email:   {{ session('user.email') }} <br>
+                    numéro:   {{ session('user.contact') }} <br>
                 </p>
                     </div>
                   </div>
@@ -234,7 +167,7 @@
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title color">Informations marchandise</h5>
-                      <p class="card-text">{{ session('form_data')['typeMarchandise']}}</p>
+                      <p class="card-text">{{ session('typeMarchandiseNom')}}</p>
                     </div>
                   </div>
                 </div>
@@ -246,16 +179,19 @@
                         <span class="titre">Montant:</span>
                         <span class="valeur">250.000f</span>
                       </div>
-                    <p class="card-text " style="color:red; font-size:12px">Réglez le paiement avant le commencement de la course.Nous n'acceptons que les francs CFA</p>
+                    <p class="card-text " style="color:red; font-size:12px">Réglez le paiement avant le commencement de la course</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="d-flex justify-content-center mt-4">
+                <form action="{{route('envoi_demande')}}" method="post">
+                  @csrf
                 <div class="cmn-btn " >
-                  <a class="banner-btn-left" id="btnCommander" href="{{route('envoi_demande')}}"  onclick="afficherCard(event)">
+                  <a class="banner-btn-left" id="btnCommander"  onclick="afficherCard(event)">
                        Commander
                   </a>
+                </form>
                 </div>
               </div>
             </div>
@@ -278,7 +214,9 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
-                  <button type="button" class="btn " style="background-color:#fdb819;color:#fff">Obtenir un autre devis</button>
+                  <form action="{{route('form_demande')}}" method="get">
+                  <button type="submit" class="btn " style="background-color:#fdb819;color:#fff">Obtenir un autre devis</button>
+                </form>
                 </div>
               </div>
             </div>

@@ -19,6 +19,7 @@ use App\Http\Controllers\dashboard_controller;
 use App\Http\Controllers\contact_controller;
 use App\Http\Controllers\client_controller;
 use App\Http\Controllers\essaie_controller;
+use App\Http\Controllers\dashboard;
 
 
 
@@ -69,7 +70,7 @@ route::get('/shop',[shop_controller::class,'shop'])->name('shop_page');
 route::get('/detail_camion',[shop_controller::class,'shop_detail'])->name('shop_detail_page');
 route::get('/panier',[shop_controller::class,'shop_panier'])->name('shop_panier_page');
 
-route::get('/tableau_de_bord',[dashboard_controller::class,'dashboard_view'])->name('dashboard_view');
+route::get('/tableau',[dashboard_controller::class,'dashboard_view'])->name('dashboard_view');
 route::get('/reservation_page',[dashboard_controller::class,'reservation_view'])->name('reservation_view');
 route::get('/old_reservation_page',[dashboard_controller::class,'old_reservation_view'])->name('old_reservation_view');
 
@@ -113,6 +114,24 @@ route::post('/devis',[essaie_controller::class,'devis'])->name('devis');
 
 
 route::get('/back_commande',[essaie_controller::class,'back_commande'])->name('back_commande');
+
+
+route::get('/dernieres_demandes',[dashboard::class,'dernieres_demandes'])->name('dernieres_demandes');
+
+route::get('/demandes_en_cours',[dashboard::class,'demandes_en_cours'])->name('demandes_en_cours');
+
+route::get('/demandes_attente',[dashboard::class,'demandes_attente'])->name('demandes_attente');
+
+route::get('/tableau_de_bord',[dashboard::class,'tableau_de_bord'])->name('tableau_de_bord');
+
+
+
+
+route::post('/annuler_demandes/{id}',[dashboard::class,'annuler_demandes'])->name('annuler_demandes');
+
+
+
+
 
 
 

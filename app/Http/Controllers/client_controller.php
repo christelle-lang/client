@@ -60,8 +60,13 @@ class client_controller extends Controller
                 $name = $user->name;
            
                 $camions=DB::table('camions')->get();
-                return redirect()->route('form_demande')->with(['name' => $name, 'camions' => $camions]);
-            } else {
+                $intendedUrl = session('intended_url', '/'); // Utilisez '/' comme URL par défaut
+        
+                // Supprimer l'URL stockée dans la session
+                session()->forget('intended_url');
+                
+                return redirect($intendedUrl)->with(['name' => $name, 'camions' => $camions]);
+                        } else {
                  return back()->withErrors([
                      'email' => 'Les identifiants sont incorrects.',
                  ]);

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class demande extends Model
+class Demande extends Model
 {
     use HasFactory;
      /**
@@ -14,6 +14,6 @@ class demande extends Model
          * @var array<int, string>
          */
    protected $filiable=[
-    'id', 'user_id', 'client_id', 'camion_id', 'typeMarchandise', 'lieuEnlevement', 'lieuExpedition', 'dateEnlevement', 'montant', 'codeDemande', 'lu', 'dateLecture', 'statutPaiement', 'statut'
+    'id', 'user_id', 'client_id', 'camion_id', 'type_de_marchandise_id','proprietaire_id', 'lieuEnlevement', 'lieuExpedition', 'dateEnlevement', 'montant', 'codeDemande', 'lu', 'dateLecture', 'statutPaiement', 'statut','dateLivraison','typecamion_id',
    ];
 }

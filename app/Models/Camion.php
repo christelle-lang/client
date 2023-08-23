@@ -16,7 +16,7 @@ class Camion extends Model
          * @var array<int, string>
          */
            protected $fillable = [
-            'id', 'proprio_id', 'conducteur_id', 'typeCamion', 'detailCamion', 'numImmatriculation', 'capaciteDeCharge', 'photoCamion', 'statut'
+             'id', 'proprio_id', 'conducteur_id', 'detailCamion', 'user_id', 'created_by', 'numImmatriculation', 'capaciteDeCharg', 'photoCamion', 'statut', 'created_at', 'updated_at', 'typeCamions', 'typeMarchandise'
            ];
     
     

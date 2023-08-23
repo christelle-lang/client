@@ -1,114 +1,13 @@
-<!DOCTYPE html>
-<html lang="zxx">
-
-<!-- Mirrored from templates.hibootstrap.com/audeck/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 May 2023 17:26:59 GMT -->
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-<link rel="stylesheet" href="assets/css/meanmenu.css">
-
-<link rel="stylesheet" href="assets/css/boxicons.min.css">
-
-<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-<link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-
-<link rel="stylesheet" href="assets/css/magnific-popup.min.css">
-
-<link rel="stylesheet" href="assets/css/animate.min.css">
-
-<link rel="stylesheet" href="assets/css/style.css">
-
-<link rel="stylesheet" href="assets/css/responsive.css">
-
-<link rel="stylesheet" href="assets/css/theme-dark.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<link rel="stylesheet" href="assets/css/accueil.css">
+@include('web.header')
 
 
-<title>Audeck - Auto Servicing Bootstrap 5 Template</title>
-<link rel="icon" type="image/png" href="assets/img/favicon.png">
 <head>
     <body class="d-flex flex-column min-vh-100 bg-light mt-5" >
 
         </div>
         
         
-        <div class="navbar-area fixed-top">
-        
-        <div class="mobile-nav">
-        <a href="index.html" class="logo">
-        <img src="assets/img/logo.png" alt="Logo">
-        </a>
-        </div>
-        
-        <div class="main-nav">
-        <div class="container-fluid">
-        <nav class="navbar navbar-expand-md navbar-light">
-        <a class="navbar-brand" href="index.html">
-        <img src="assets/img/logo.png" width="120px" class="logo-one" alt="Logo">
-        </a>
-        
-        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-        
-        <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href="{{route('accueil_page')}}" class="nav-link ">Accueil</a>
-        </li>   
-         {{-- <li class="nav-item">
-        <a href="#" class="nav-link dropdown-toggle ">Camion</a>
-        <ul class="dropdown-menu">
-          @foreach ($types as $type)
-          <li class="nav-item">
-            <form id="setTypeForm_{{ $type->id }}" method="post" action="{{ route('search') }}">
-              @csrf
-              <input type="hidden" name="type_id" value="{{ $type->id }}">
-              <a href="#" onclick="event.preventDefault(); document.getElementById('setTypeForm_{{ $type->id }}').submit();" class="nav-link">{{ $type->nameCamion }}</a>
-            </form>
-          </li>
-          @endforeach
-        </ul>
-        
-        
-        
-        </li>  --}}
-        <li class="nav-item">
-          <a href="{{route('contact_page')}}" class="nav-link">Contact</a>
-        </li> 
-        
-        
-        </ul>
-        </div>
-        
-        <a href="{{route('form_demande')}}"><button class="btn btn-custom1 me-2" type="button"> Trouver des chargements </button></a>
-        <a href="{{route('connexion_page')}}">   <button class="btn btn-custom2" type="button"> Se connecter</button></a>
-        
-        
-        {{-- <div class="cmn-btn">
-          <a class="banner-btn-left" href="{{route('connexion_page')}}">
-            Trouver des chargements
-          </a>
-        </div>
-        <div class="cmn-btn ">
-          <a class="banner-btn-left" href="{{route('connexion_page')}}">
-            Connexion
-          </a>
-        </div> --}}
-        
-         
-        </div>
-        </nav>
-        </div>
-        </div>
-        </div>
-        
-        
-        
-        
+  @include('web.navbar')
         
         
 <style>
@@ -136,6 +35,8 @@
 }
    
 
+
+
 </style>
 
 </head>
@@ -161,21 +62,36 @@
         </div>
 
         <div class="col-md-6 mb-1">
-          <label for="villeExpediton">Ville d'enlèvement:</label>
+          <label for="villeEnlevement">Ville d'enlèvement:</label>
 
-          <select id="selectCity" name="villeEnlevement" class="form-select form-select-lg mb-3 @error('villeEnlevement') is-invalid @enderror"  name="villeEnlevement" value="{{ old('villeEnlevement') }}" aria-label=".form-select-lg example" required>
+          <select id="selectCity" name="villeEnlevement" class="form-select form-select-lg mb-3 @error('villeEnlevement') is-invalid @enderror"   value="{{ old('villeEnlevement') }}" aria-label=".form-select-lg example" required>
             @error('villeEnlevement')
     <div class="invalid-feedback">
         svp sélectionnez une ville
     </div>
 @enderror
+
             <option selected disabled>Ville</option>
           </select>
           <ul id="results"></ul>
         </div>
       </div>
+
+     
       <div class="form-group mb-4">
-        <label for="dateExpedition">Date voulue d'enlèvement:</label>
+        <label for="precisEnlevement">Précisé le lieu d'enlèvement:</label>
+        <input type="text" class="form-control @error('precisEnlevement') is-invalid @enderror"  value="{{ old('precisEnlevement') }}"  name="" required >
+        @error('precisEnlevement')
+    <div class="invalid-feedback">
+        Préciser le lieu d'enlèvement
+    </div>
+
+   @enderror
+   
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="dateEnlevement">Date voulue d'enlèvement:</label>
         <input type="date" class="form-control @error('dateEnlevement') is-invalid @enderror"  value="{{ old('dateEnlevement') }}" id="dateExpedition" name="dateEnlevement" required >
         @error('dateEnlevement')
     <div class="invalid-feedback">
@@ -184,6 +100,7 @@
    @enderror
    
       </div>
+      
 
       <h6 class="category-title color ">Informations sur la livraison</h6>
 
@@ -198,8 +115,8 @@
         </div>
         <div class="col-md-6 mb-1">
           <label for="villeLivraison">Ville de livraison:</label>
-          <select id="selectCity2" name="villeLivraison" class="form-select form-select-lg mb-3   @error('dateEnlevement') is-invalid @enderror"  value="{{ old('dateEnlevement') }}" id="dateExpedition" name="dateEnlevement" aria-label=".form-select-lg example">
-            @error('dateEnlevement')
+          <select id="selectCity2" name="villeLivraison" class="form-select form-select-lg mb-3   @error('villeLivraison') is-invalid @enderror"  value="{{ old('villeLivraison') }}" id="dateExpedition"  aria-label=".form-select-lg example">
+            @error('villeLivraison')
             <div class="invalid-feedback">
                 svp sélectionnez une ville
             </div>
@@ -209,6 +126,17 @@
           <ul id="results2"></ul>
         </div>
       </div>
+
+      <div class="form-group mb-4">
+        <label for="precisLivraison">Précisé le lieu de livraison:</label>
+        <input type="text" class="form-control @error('precisLivraison') is-invalid @enderror"  value="{{ old('precisLivraison') }}"  name="" required >
+        @error('precisLivraison')
+    <div class="invalid-feedback">
+        Préciser le lieu de livraison
+    </div>
+    @enderror
+  </div>
+
       <div class="form-group mb-3">
         <label for="dateLivraison">Date voulue de livraison:</label>
         <input type="date" class="form-control @error('dateLivraison') is-invalid @enderror"  value="{{ old('dateLivraison') }}"  aria-label=".form-select-lg example" id="dateExpedition2" name="dateLivraison" >
@@ -221,7 +149,7 @@
 
       <h6 class="category-title color">Informations sur la marchandise</h6>
 
-      <label for="dateExpedition">Type de camion:</label>
+      <label for="typeCamion">Type de camion:</label>
       <select id="typeCamion" name="typeCamion" class="form-select regionForm form-select-lg mb-3 @error('typeCamion') is-invalid @enderror"  value="{{ old('typeCamion') }}"  aria-label=".form-select-lg example" required>
         @error('typeCamion')
         <div class="invalid-feedback">
@@ -233,23 +161,23 @@
         @endforeach
       </select>
 
-      <div id="merchandiseContainer">
-        <!-- Existing merchandise input fields -->
-        <div class="form-group">
-          <label for="typeMarchandise">Type de marchandise:</label>
-          <input type="text" class="form-control @error('typeMarchandise') is-invalid @enderror"  value="{{ old('typeMarchandise') }}"  aria-label=".form-select-lg example"  name="typeMarchandise">
-          @error('typeMarchandise')
-          <div class="invalid-feedback">Svp renseignez ce champ
-          </div>
-         @enderror
+      <label for="typeMarchandise">Type de marchandise:</label>
+      <select id="typeMarchandise" name="typeMarchandise" class="form-select regionForm form-select-lg mb-3 @error('typeMarchandise') is-invalid @enderror"  value="{{ old('typeMarchandise') }}"  aria-label=".form-select-lg example" required>
+        @error('typeMarchandise')
+        <div class="invalid-feedback">
+            svp sélectionnez un type de camion
         </div>
-      </div>
-      <button id="addMerchandiseBtn" class="btn btn-primary"  onclick="event.preventDefault(); addMerchandiseItem();">Ajouter une nouvelle marchandise</button>
+       @enderror
+        @foreach ($typesMarchandise as $typeMarchandise)
+          <option value="{{ $typeMarchandise->id }}">{{ $typeMarchandise->name}}</option>
+        @endforeach
+      </select>
 
+      
 
       <div class="d-flex justify-content-center mt-4">
         <div class="cmn-btn mb-5">
-          <a class="banner-btn-left"  onclick="submitFormOnClick()">
+          <a class="banner-btn-left" onclick="submitFormOnClick()" style="cursor:pointer">
                 Obtenir un devis
           </a>
         </div>
@@ -263,8 +191,9 @@
   <script>
     function submitFormOnClick() {
 
-    document.getElementById('search').submit(); // Soumet le formulaire avec l'ID 'search'
+    document.getElementById('search').submit(); 
   }
+
   </script>
 
   <script>

@@ -11,8 +11,10 @@ class accueil_controller extends Controller
 {
     public function accueil(){
         $types=DB::table('typecamions')->get();
+        session(['intended_url' => url()->current()]);
 
         $camions=DB::table('camions')->get();
-        return view('web.accueil',compact('camions','types'));
+        return view('web.accueil',compact('camions','types'))
+        ;
     }
 }

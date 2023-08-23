@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Type_de_marchandise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Ville;
@@ -103,20 +104,21 @@ class essaie_controller extends Controller
     {
      
 
-
+    
         if (Auth::check()) {
+
             $clientId = Auth::id();
             
             $formData = $request->session()->get('form_data');
             
             $votreModele = new Demande();
-            $votreModele->typeMarchandise = $formData['typeMarchandise'];
+            $votreModele->type_de_marchandise_id = $formData['typeMarchandise'];
             $votreModele->lieuEnlevement = $formData['villeEnlevement'];
             $votreModele->lieuExpedition = $formData['villeLivraison'];
             $votreModele->dateEnlevement = $formData['dateEnlevement'];
             $votreModele->dateEnlevement = $formData['dateLivraison'];
             $votreModele->typecamion_id = $formData['typeCamion'];
-            
+       
             // Générer automatiquement le code de la demande
             $codeDemande = uniqid(); // Utilisez une fonction de génération de code unique appropriée si nécessaire
             $votreModele->codeDemande = $codeDemande;
@@ -124,7 +126,7 @@ class essaie_controller extends Controller
             $votreModele->statutPaiement = "non payé";
             $votreModele->lu = 0;
             $votreModele->client_id = $clientId; // Enregistre l'ID de l'utilisateur
-            
+           
             $votreModele->save();
             
             // Réponse JSON pour indiquer le succès
@@ -143,20 +145,23 @@ class essaie_controller extends Controller
       $regions=DB::table('regions')->get();
       $types = DB::table('typecamions')->get();
       $form_data=session('form_data');
-      return view('web.form_demande_back',compact('regions','types'));
+      $typesMarchandise = DB::table('type_de_marchandises')->get();
+
+      return view('web.form_demande_back',compact('regions','types','typesMarchandise'));
     }
 
 
     public function form_demande( Request $request){
       $regions=DB::table('regions')->get();
       $types = DB::table('typecamions')->get();
-      
+      $typesMarchandise = DB::table('type_de_marchandises')->get();
+      session(['intended_url' => url()->current()]);
+
      
-      return view('web.form_demande',compact('regions','types'));
+      return view('web.form_demande',compact('regions','types','typesMarchandise'));
     }
 
     public function devis(Request $request){
-
     
       $validatedData = $request->validate([
         'villeEnlevement' => 'required',
@@ -167,13 +172,18 @@ class essaie_controller extends Controller
         'typeCamion' => 'required',
     ]);
       $formData = $request->all();
-      
       $typeCamionId = $formData['typeCamion'];
       
 
        $typeCamion = Typecamion::find($typeCamionId);
        $typeCamionNom = $typeCamion->name;
        $request->session()->put('typeCamionNom', $typeCamionNom);
+
+       $typeMarchandiseId = $formData['typeMarchandise'];
+      
+       $typeMarchandise = Type_de_marchandise::find($typeMarchandiseId);
+       $typeMarchandiseNom = $typeMarchandise->name;
+       $request->session()->put('typeMarchandiseNom', $typeMarchandiseNom);
 
 
       $request->session()->put('form_data', $formData);
