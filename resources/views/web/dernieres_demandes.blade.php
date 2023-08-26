@@ -54,12 +54,8 @@
         @endforeach
     </div>
     <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            @for ($i = 1; $i <= $demandes->lastPage(); $i++)
-                <li class="page-item{{ $i == $demandes->currentPage() ? ' active' : '' }}">
-                    <a class="page-link page-link-ajax" href="#" data-url="{{ $demandes->url($i) }}">{{ $i }}</a>
-                </li>
-            @endfor
+        <ul class="pagination justify-content-center">
+            {{ $demandes->links() }}
         </ul>
     </nav>
                                                                                                                                                                                                                       
@@ -67,6 +63,33 @@
 
   
 <script>
+
+
+document.addEventListener("DOMContentLoaded", function() {
+        // Charger les données initiales
+        loadDemandes("{{ $demandes->url($demandes->currentPage()) }}");
+
+        // Lorsqu'un lien de pagination est cliqué
+        $(document).on("click", ".pagination a", function(event) {
+            event.preventDefault();
+            var url = $(this).attr("href");
+            loadDemandes(url);
+        });
+
+        // Fonction pour charger les demandes via AJAX
+        function loadDemandes(url) {
+            $.ajax({
+                url: url,
+                success: function(data) {
+                    $("#demandes-container").html(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Une erreur s'est produite:", error);
+                }
+            });
+        }
+    });
+    
 const paginationContainer = document.querySelector(".pagination");
 const demandesContainer = document.getElementById("demandes-container");
 

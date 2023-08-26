@@ -63,7 +63,7 @@ route::get('/inscription',[login_controller::class,'inscription'])->name('inscri
 route::get('/connexion',[login_controller::class,'connexion'])->name('connexion_page');
 
 
-route::get('/accueil',[accueil_controller::class,'accueil'])->name('accueil_page');
+route::get('/',[accueil_controller::class,'accueil'])->name('accueil_page');
 
 
 route::get('/shop',[shop_controller::class,'shop'])->name('shop_page');
