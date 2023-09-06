@@ -1,65 +1,82 @@
-
-<div class="card">
+<div class="card"  id="tableBody">
     <div class="card-header">
-       Dernières demandes
+        Dernières demandes
     </div>
-    <div class="card-body" id="demandes-container">
-        @foreach ($demandes as $demande)
-        <div class="card w-100">
-            <div class="card-body">
-                <h5 class="card-title"> Demande {{ $demande->codeDemande}}</h5>
+    <div class="card-body">
+        @if(count($demandes) > 0)
 
-                Destination: {{ $demande->lieuEnlevement}} à {{ $demande->lieuExpedition}} <br>
-                Date: {{ $demande->dateEnlevement}} à {{ $demande->dateLivraison}} <br>
-                Montant: <span class="fw-bold">{{ $demande->montant}} </span><br>
-                Statut paiement:
-                @if ($demande->statutPaiement == 'non payé')
-                    <a href="#" class="btn btn-danger text-btn" style="cursor: text">{{ $demande->statutPaiement }}</a>
-                @else
-                    <a href="#" class="btn btn-success text-btn" style="cursor: text">{{ $demande->statutPaiement }}</a>
-                @endif
-                <br>
-                Statut:
-                @if ($demande->statut == 'en attente')
-                    <a href="#" class="btn btn-warning text-btn" style="cursor: text">{{ $demande->statut }}</a>
-                @elseif ($demande->statut == 'accepte')
-                    <a href="#" class="btn btn-success text-btn" style="cursor: text">{{ $demande->statut }}</a>
-                @elseif ($demande->statut == 'termine')
-                    <a href="#" class="btn btn-dark text-btn" style="cursor: text">{{ $demande->statut }}</a>
-                @elseif ($demande->statut == 'en cours')
-                    <a href="#" class="btn btn-primary text-btn" style="cursor: text">{{ $demande->statut }}</a>
-                @endif
-                <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Code Demande</th>
+                    <th>Destination</th>
+                    <th>Date</th>
+                    <th>Montant</th>
+                    <th>Statut Paiement</th>
+                    <th>Statut</th>
+                    <th>Créé le</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($demandes as $demande)
+                <tr>
+                    <td>{{ $demande->codeDemande }}</td>
+                    <td>{{ $demande->lieuEnlevement }} à {{ $demande->lieuExpedition }}</td>
+                    <td>{{ $demande->dateEnlevement }} à {{ $demande->dateLivraison }}</td>
+                    <td>{{ $demande->montant }}</td>
+                    <td>
+                        @if ($demande->statutPaiement == 'non payé')
+                            <span class="btn btn-danger text-btn" style="cursor: text">{{ $demande->statutPaiement }}</span>
+                        @else
+                            <span class="btn btn-success text-btn" style="cursor: text">{{ $demande->statutPaiement }}</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($demande->statut == 'en attente')
+                            <span class="btn btn-warning text-btn" style="cursor: text">{{ $demande->statut }}</span>
+                        @elseif ($demande->statut == 'accepte')
+                            <span class="btn btn-success text-btn" style="cursor: text">{{ $demande->statut }}</span>
+                        @elseif ($demande->statut == 'termine')
+                            <span class="btn btn-dark text-btn" style="cursor: text">{{ $demande->statut }}</span>
+                        @elseif ($demande->statut == 'en cours')
+                            <span class="btn btn-primary text-btn" style="cursor: text">{{ $demande->statut }}</span>
+                        @endif
+                    </td>
+                    <td>{{ $demande->created_at }}</td>
+                    <td>
+                        @if ($demande->statut == 'en attente' || ($demande->statut == 'accepte' && $demande->statutPaiement == 'non payé'))
+                            <form action="/annuler_demandes/{{ $demande->id }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?')">Annuler</button>
+                            </form> <br>
+                        @endif
 
-                créé le: {{ $demande->created_at }}
-            </div>
-            <div class="card-footer d-flex justify-content-center">
-
-                @if ($demande->statut == 'en attente' || ($demande->statut == 'accepte' && $demande->statutPaiement == 'non payé'))
-<div>
-                    <form action="/annuler_demandes/{{ $demande->id }}" method="post">
-                        @csrf
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?')">Annuler</button>
-                    </form>
-                </div>
-                @endif
-
-                @if ($demande->statut == 'accepte' && $demande->statutPaiement == 'non payé')
-                <div>
-                    <a href="#" class="btn btn-primary text-btn">Payer</a>
-                </div>
-                @endif
-            </div>
-        </div>
-        @endforeach
+                        @if ($demande->statut == 'accepte' && $demande->statutPaiement == 'non payé')
+                            <a href="#" class="btn btn-primary text-btn">Payer</a>
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+   
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center" id="pagination">
+                @for ($i = 1; $i <= $demandes->lastPage(); $i++)
+                    <li class="page-item{{ $i == $demandes->currentPage() ? ' active' : '' }}">
+                        <a class="page-link" href="#" onclick="loadPageEffectue({{ $i }})">{{ $i }}</a>
+                    </li>
+                @endfor
+            </ul>
+            
+        </nav>
+        @else 
+        <p>Aucune demande en attente</p>
+        @endif
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            {{ $demandes->links() }}
-        </ul>
-    </nav>
-                                                                                                                                                                                                                      
 </div>
+
 
   
 <script>

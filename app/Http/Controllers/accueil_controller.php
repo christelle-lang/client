@@ -14,7 +14,12 @@ class accueil_controller extends Controller
         session(['intended_url' => url()->current()]);
 
         $camions=DB::table('camions')->get();
-        return view('web.accueil',compact('camions','types'))
+        $image= DB::table('image')
+        ->join('typecamions', 'image.typeCamion', '=', 'typecamions.id')
+        ->select('image.*', 'typecamions.name AS nom_type_de_camion')
+        ->get();
+
+        return view('web.accueil',compact('camions','types','image'))
         ;
     }
 }

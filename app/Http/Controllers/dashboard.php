@@ -34,27 +34,24 @@ class dashboard extends Controller
 
 public function demandes_attente()
 {
-    $demandesEnAttente = Demande::where('statut', 'en attente')->get();
-    // if ($demandesEnAttente->isEmpty()) {
-    //     $demandesEnAttente="Aucune demandes en attente";
-    // }
+    $demandesEnAttente = Demande::where('statut', 'en attente')->paginate(10);
 
 
     return view('web.demandes_attente', ['demandesEnAttente' => $demandesEnAttente]);
 }
 
-public function demandes_accepte()
+public function demandes_acceptees()
 {
     $demandesaccepte = Demande::where('statut', 'accepte')->get();
 
-    return view('web.demandes_accepte', ['demandesEnCours' => $demandesaccepte]);
+    return view('web.demandes_acceptees', ['demandesAcceptees' => $demandesaccepte]);
 }
 
 public function demandes_termine()
 {
     $demandesTermine = Demande::where('statut', 'termine')->get();
 
-    return view('web.demandes_termine', ['demandesEnCours' => $demandesTermine]);
+    return view('web.demandes_termine', ['demandesTerminees' => $demandesTermine]);
 }
 
 public function tableau_de_bord()
@@ -83,5 +80,6 @@ public function tableau_de_bord()
     
     return back()->with('success', 'Demande supprimée avec succès');
 }
+
 
 }

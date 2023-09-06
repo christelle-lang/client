@@ -211,8 +211,16 @@
       <h3 class="fw-bold">Nos types de camion</h3>
       </div>
       <div class="engineer-slider owl-theme owl-carousel">
-      <div class="engineer-item">
-      <img src="assets/img/benne.jpg" alt="Engineer">
+        @foreach ($image as $img)
+    <div class="engineer-item">
+        <img src="{{ $img->image }}" alt="Truck Type">
+        <div class="engineer-bottom">
+            <h3>{{ $img->nom_type_de_camion }}</h3>
+        </div>
+    </div>
+@endforeach
+{{-- 
+      <img src="assets/img/fourgon.png" alt="Engineer">
       <div class="engineer-bottom">
       <h3>Benne</h3>
       </div>
@@ -280,7 +288,7 @@
       <div class="engineer-item">
       <img src="assets/img/benne.jpg" alt="Engineer">
       <div class="engineer-bottom">
-      <h3>Benne</h3>
+      <h3>Benne</h3> --}}
       </div>
       </div>
       </div>

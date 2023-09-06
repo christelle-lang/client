@@ -1,9 +1,6 @@
 <?php
 
 
-
-
-
 use App\Http\Controllers\plateau_controller;
 use App\Http\Controllers\frigorifique_controller;
 use App\Http\Controllers\benne_controller;
@@ -75,17 +72,11 @@ route::get('/reservation_page',[dashboard_controller::class,'reservation_view'])
 route::get('/old_reservation_page',[dashboard_controller::class,'old_reservation_view'])->name('old_reservation_view');
 
 
-route::get('/fourgon_page',[fourgon_controller::class,'fourgon_page'])->name('fourgon_page');
 
-route::get('/semi_remorque_page',[semi_remorque_controller::class,'semi_remorque_page'])->name('semi_remorque_page');
 
-route::get('/citerne_page',[citerne_controller::class,'citerne_page'])->name('citerne_page');
 
-route::get('/frigorifique_page',[frigorifique_controller::class,'frigorifique_page'])->name('frigorifique_page');
 
-route::get('/plateau_page',[plateau_controller::class,'plateau_page'])->name('plateau_page');
 
-route::get('/benne_page',[benne_controller::class,'benne_page'])->name('benne_page');
 
 
 route::post('/set_type/{type_id}',[benne_controller::class,'setType'])->name('set_type');
@@ -95,7 +86,6 @@ route::post('/region',[benne_controller::class,'villeRegion'])->name('region');
 route::post('/search',[benne_controller::class,'search'])->name('search');
 
 
-route::get('/essaie',[essaie_controller::class,'affiche_essaie'])->name('essaie');
 
 route::post('/recherche',[essaie_controller::class,'recherche'])->name('recherche');
 
@@ -121,6 +111,12 @@ route::get('/dernieres_demandes',[dashboard::class,'dernieres_demandes'])->name(
 route::get('/demandes_en_cours',[dashboard::class,'demandes_en_cours'])->name('demandes_en_cours');
 
 route::get('/demandes_attente',[dashboard::class,'demandes_attente'])->name('demandes_attente');
+
+route::get('/demandes_acceptees',[dashboard::class,'demandes_acceptees'])->name('demandes_acceptees');
+
+
+route::get('/attente/{pageNumber}',[dashboard::class,'getDemandesAttente'])->name('attente_pagination');
+
 
 route::get('/tableau_de_bord',[dashboard::class,'tableau_de_bord'])->name('tableau_de_bord');
 

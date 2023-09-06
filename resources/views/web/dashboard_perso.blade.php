@@ -14,28 +14,28 @@
   <div class="container mt-5 mb-5">
     <div class="row">
         <div class="col-md-3">
-            <div class="card">
+            <div class="card menu-card">
                 <div class="card-header">
                     <h4 class="card-title">Menu</h4>
                 </div>
                 <div class="card-body">
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action" id="tableau_de_bord">
+                        <a href="#" class=" menu-item list-group-item list-group-item-action" id="tableau_de_bord">
                             <i class="fas fa-user"></i>  Tableau de bord
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action" id="dernieres_demandes">
+                        <a href="#" class="menu-item list-group-item list-group-item-action" id="dernieres_demandes">
                             <i class="fas fa-clipboard-check"></i>  Demandes éffectuées
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action" id="demandes_en_attente">
+                        <a href="#" class="menu-item list-group-item list-group-item-action" id="demandes_en_attente">
                             <i class="fas fa-hourglass"></i>  Demandes en attente
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action" id="demandes_acceptees">
+                        <a href="#" class="menu-item list-group-item list-group-item-action" id="demandes_acceptees">
                             <i class="fas fa-check"></i>  Demandes acceptées
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action" id="demandes_en_cours">
+                        <a href="#" class="menu-item list-group-item list-group-item-action" id="demandes_en_cours">
                             <i class="fas fa-cog"></i>  Demandes en cours
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action" id="demandes_terminées ">
+                        <a href="#" class="menu-item list-group-item list-group-item-action" id="demandes_terminées ">
                             <i class="fas fa-check-circle"></i>  Demandes terminées 
                         </a>
                     </div>
@@ -54,6 +54,8 @@
           <div id="dernieres-demandes-content"></div>
           <div id="demandes-en-cours-content"></div>
           <div id="demandes-en-attente-content"></div>
+          <div id="demandes-acceptees-content"></div>
+
 
 
             </div>
@@ -61,9 +63,60 @@
     </div>
 
 @include('web.footer')
-    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    menuItems.forEach(item => {
+        item.addEventListener("click", function() {
+            // Supprimez la classe 'active' de tous les éléments du menu
+            menuItems.forEach(menuItem => {
+                menuItem.classList.remove("active");
+            });
+
+            // Ajoutez la classe 'active' à l'élément du menu actuel
+            this.classList.add("active");
+
+            // Ajoutez également la classe 'active-menu-item' pour le style de fond jaune
+            this.classList.add("active-menu-item");
+        });
+    });
+});
+
+    </script>
+    <script>
+        function loadPageEffectue(pageNumber) {
    
-        
+   fetch(`/dernieres_demandes?page=${pageNumber}`)
+      .then(response => response.text())
+       .then(data => {
+           const tableBody = document.getElementById("tableBody");
+           tableBody.innerHTML = data; // Mettre à jour le contenu du tableau avec la nouvelle page
+       })
+       .catch(error => {
+           console.error("Une erreur s'est produite:", error);
+  });
+    }
+    </script>
+
+   <script>
+     function loadPageAttente(pageNumber) {
+   
+    fetch(`/demandes_attente?page=${pageNumber}`)
+       .then(response => response.text())
+        .then(data => {
+            const tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = data; // Mettre à jour le contenu du tableau avec la nouvelle page
+        })
+        .catch(error => {
+            console.error("Une erreur s'est produite:", error);
+   });
+     }
+
+
+
+   </script>
+  
 
 
 
@@ -73,10 +126,12 @@
       const dernieresDemandesLink = document.getElementById('dernieres_demandes');
       const demandesEnCoursLink = document.getElementById('demandes_en_cours'); // Correction ici
       const demandesEnAttenteLink = document.getElementById('demandes_en_attente'); // Ajout du lien pour demandes en attente
+      const demandesAccepteesLink = document.getElementById('demandes_acceptees'); // Ajout du lien pour demandes en attente
 
       const paginationLinks = document.querySelectorAll('.pagination a');
-  
       const tableauDeBordContent = document.getElementById('tableau-de-bord-content');
+      const demandesAccepteesContent = document.getElementById('demandes-acceptees-content');
+
       const dernieresDemandesContent = document.getElementById('dernieres-demandes-content');
       const demandesEnCoursContent = document.getElementById('demandes-en-cours-content'); // Ajout du contenu pour demandes en attente
 
@@ -113,6 +168,25 @@
               });
       };
      
+        
+      const loadDemandesEnCours= (pageUrl) => {
+          fetch(pageUrl)
+              .then(response => response.text())
+              .then(data => {
+                demandesEnCoursContent.innerHTML = data;
+              });
+      };
+     
+      const loadDemandesAcceptees= (pageUrl) => {
+          fetch(pageUrl)
+              .then(response => response.text())
+              .then(data => {
+                demandesAccepteesContent.innerHTML = data;
+              });
+      };
+     
+  
+  
   
        
       tableauDeBordLink.addEventListener('click', function () {
@@ -130,6 +204,7 @@
       dernieresDemandesLink.addEventListener('click', function () {
         demandesEnAttenteContent.style.display = 'none';
         tableauDeBordContent.style.display = 'none';
+        demandesEnCoursContent.style.display = 'none';
           dernieresDemandesContent.style.display = 'block';
           loadDernieresDemandes(`{{ route('dernieres_demandes') }}`);
           localStorage.setItem('currentContent', 'dernieres-demandes-content');
@@ -138,11 +213,31 @@
       demandesEnAttenteLink.addEventListener('click', function () {
         dernieresDemandesContent.style.display = 'none';
         tableauDeBordContent.style.display = 'none';
+        demandesEnCoursContent.style.display = 'none';
         demandesEnAttenteContent.style.display = 'block';
           loadDemandesEnAttente(`{{ route('demandes_attente') }}`);
           localStorage.setItem('currentContent', 'demandes-en-attente-content');
       });
       
+      demandesEnCoursLink.addEventListener('click', function () {
+        dernieresDemandesContent.style.display = 'none';
+        tableauDeBordContent.style.display = 'none';
+        demandesEnAttenteContent.style.display = 'none';
+        demandesEnCoursContent.style.display = 'none';
+        demandesEnCoursContent.style.display = 'block';
+          loadDemandesEnCours(`{{ route('demandes_en_cours') }}`);
+          localStorage.setItem('currentContent', 'demandes-en-cours-content');
+      });
+          
+      demandesAccepteesLink.addEventListener('click', function () {
+        dernieresDemandesContent.style.display = 'none';
+        tableauDeBordContent.style.display = 'none';
+        demandesEnAttenteContent.style.display = 'none';
+        demandesEnCoursContent.style.display = 'none';
+        demandesAccepteesContent.style.display = 'block';
+        loadDemandesAcceptees(`{{ route('demandes_acceptees') }}`);
+          localStorage.setItem('currentContent', 'demandes-acceptees-content');
+      });
           
       
   
@@ -155,6 +250,9 @@
       }
       else if(currentContent === 'demandes-en-attente-content') {
         demandesEnAttenteLink.click();
+      }
+      else if(currentContent === 'demandes-en-cours-content') {
+        demandesEnCoursLink.click();
       }
        else {
           tableauDeBordLink.click();
